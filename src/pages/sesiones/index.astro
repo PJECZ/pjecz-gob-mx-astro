@@ -1,0 +1,32 @@
+---
+import type { WebPaginas } from "../../interfaces/web_paginas";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+// Importar las variables de entorno
+const API_KEY = import.meta.env.API_KEY;
+const HOST = import.meta.env.HOST;
+
+// Definir el parametro para la URL donde se va a pasar la clave de la rama 'SE'
+const myParams = new URLSearchParams({ web_rama_clave: 'SE'});
+
+// Definir el init para hacer la petición a la API
+const myInit = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application',
+        'X-Api-Key': API_KEY,
+    },
+};
+
+// Hacer la petición a la API
+const myResponse = await fetch(`${HOST}/web_paginas?${myParams.toString()}`, myInit);
+const { items } = await myResponse.json() as WebPaginas;
+---
+
+<MainLayout title="Sesiones">
+    <h1 class="text-3xl text-blue-500 mt-3">Sesiones</h1>
+    <hr />
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {items.map((pagina) => <li><a href={`/sesiones/${pagina.clave}`}>{pagina.titulo}</a></li>)}
+    </section>
+</MainLayout>
