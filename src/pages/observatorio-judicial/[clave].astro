@@ -1,0 +1,56 @@
+---
+import type { GetStaticPaths } from "astro";
+import type { WebPagina } from "../../interfaces/web_pagina";
+import type { WebPaginas } from "../../interfaces/web_paginas";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+// Definir las rutas estaticas de cada pagina de la rama
+export const getStaticPaths = (async() => {
+
+    // Importar las variables de entorno
+    const API_KEY = import.meta.env.API_KEY;
+    const HOST = import.meta.env.HOST;
+
+    // Definir el init para hacer la petición a la API
+    const myInit = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application',
+            'X-Api-Key': API_KEY,
+        },
+    };
+
+    // Hacer la petición a la API para obtener las paginas de la rama 'OJ'
+    const myResponse = await fetch(`${HOST}/web_paginas?web_rama_clave=OJ`, myInit);
+    const { items } = await myResponse.json() as WebPaginas;
+
+    // Retornar las claves de las paginas para generar las rutas
+    return items.map((pagina) => ({ params: { clave: pagina.clave }}));
+
+}) satisfies GetStaticPaths;
+
+// Importar las variables de entorno
+const API_KEY = import.meta.env.API_KEY;
+const HOST = import.meta.env.HOST;
+
+// Obtener el parametro de la URL
+const { clave } = Astro.params;
+
+// Definir el init para hacer la petición a la API
+const myInit = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application',
+        'X-Api-Key': API_KEY,
+    },
+};
+
+// Hacer la petición a la API para obtener la pagina
+const myResponse = await fetch(`${HOST}/web_paginas/${clave}`, myInit);
+const pagina = await myResponse.json() as WebPagina;
+
+---
+<MainLayout title="Observatorio Judicial">
+    <h1 class="text-3xl text-blue-500 mt-3">{pagina.titulo}</h1>
+    <section class="mt-3" set:html={pagina.contenido}></section>
+</MainLayout>
