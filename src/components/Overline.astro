@@ -1,0 +1,12 @@
+---
+/**
+ * Overline — etiqueta de sección en versalitas con tracking amplio.
+ */
+interface Props {
+  color?: string;
+}
+const { color } = Astro.props;
+---
+<div class="overline" style={color ? `color:${color}` : undefined}>
+  <slot />
+</div>

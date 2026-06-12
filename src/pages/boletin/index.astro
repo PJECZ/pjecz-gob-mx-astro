@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Overline from '@components/Overline.astro';
+import Badge from '@components/Badge.astro';
+import { NEWS } from '@data/site';
+---
+<BaseLayout current="boletin" title="Boletín judicial — Poder Judicial de Coahuila">
+  <section class="boletin container">
+    <Overline>Boletín judicial</Overline>
+    <h1 class="boletin__title">Publicaciones y avisos</h1>
+    <div class="boletin__list">
+      {NEWS.map((n) => (
+        <a class="boletin-row" href={`/boletin/${n.slug}`}>
+          <span class="boletin-row__date">{n.date}</span>
+          <Badge color={n.color}>{n.cat}</Badge>
+          <span class="boletin-row__title">{n.title}</span>
+          <span class="boletin-row__more">Leer →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .boletin { padding-block: var(--space-8); }
+  .boletin__title { font: 400 var(--fs-48)/1.1 var(--font-display); color: var(--fg); margin: 10px 0 var(--space-7); }
+  .boletin__list { border-top: 1px solid var(--accent); }
+  .boletin-row {
+    display: grid;
+    grid-template-columns: 120px 130px 1fr auto;
+    gap: var(--space-5);
+    align-items: center;
+    padding: 22px 4px;
+    border-bottom: 1px solid var(--border);
+    transition: background .15s ease;
+  }
+  .boletin-row:hover { background: var(--bg-muted); }
+  .boletin-row__date { font: 400 var(--fs-12)/1 var(--font-sans); letter-spacing: var(--tracking-wider); color: var(--fg-subtle); }
+  .boletin-row__title { font: 400 var(--fs-18)/1.3 var(--font-display); color: var(--fg); }
+  .boletin-row__more {
+    font: 700 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  @media (max-width: 720px) {
+    .boletin-row { grid-template-columns: 1fr auto; row-gap: 8px; }
+    .boletin-row__title { grid-column: 1 / -1; }
+  }
+</style>

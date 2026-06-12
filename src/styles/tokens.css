@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Poder Judicial Coahuila — Design Tokens
+   Fundamentos visuales oficiales. Las fuentes se sirven desde /public/fonts.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Gotham";
+  src: url("/fonts/Gotham-Book.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Gotham";
+  src: url("/fonts/Gotham-Bold.otf") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Arno Pro";
+  src: url("/fonts/ArnoPro-Caption.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* Paleta institucional primaria (logotipo oficial) */
+  --pj-ink:        #39444B;
+  --pj-slate:      #4B5760;
+  --pj-sage:       #B4B49E;
+  --pj-mist:       #C6CABD;
+
+  /* Acentos ceremoniales (familia 6105 C — categóricos) */
+  --pj-blue:       #323B6B;
+  --pj-green:      #486238;
+  --pj-purple:     #5F2D71;
+  --pj-magenta:    #9E3182;
+
+  /* Escala neutra */
+  --pj-black-100:  #272425;
+  --pj-black-75:   #646566;
+  --pj-black-50:   #939497;
+  --pj-black-25:   #C6C7C8;
+  --pj-white:      #FFFFFF;
+
+  /* Roles semánticos */
+  --bg:            var(--pj-white);
+  --bg-muted:      #F5F5F2;
+  --bg-subtle:     var(--pj-mist);
+  --bg-sage:       var(--pj-sage);
+  --bg-dark:       var(--pj-ink);
+  --bg-inverse:    var(--pj-black-100);
+
+  --fg:            var(--pj-ink);
+  --fg-muted:      var(--pj-slate);
+  --fg-subtle:     var(--pj-black-75);
+  --fg-faint:      var(--pj-black-50);
+  --fg-inverse:    var(--pj-white);
+
+  --border:        rgba(57, 68, 75, 0.16);
+  --border-strong: rgba(57, 68, 75, 0.32);
+  --border-faint:  rgba(57, 68, 75, 0.08);
+  --divider:       var(--pj-black-25);
+
+  --accent:        var(--pj-ink);
+  --accent-weak:   var(--pj-sage);
+  --link:          var(--pj-slate);
+  --link-hover:    var(--pj-ink);
+
+  --success:       #486238;
+  --warning:       #8A6D2B;
+  --danger:        #8A2B2B;
+  --info:          #323B6B;
+
+  /* Tipografía */
+  --font-display:  "Arno Pro", "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-sans:     "Gotham", "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:     ui-monospace, "SF Mono", "JetBrains Mono", Consolas, monospace;
+
+  --fs-12: 0.75rem;  --fs-13: 0.8125rem; --fs-14: 0.875rem; --fs-15: 0.9375rem;
+  --fs-16: 1rem;     --fs-18: 1.125rem;  --fs-20: 1.25rem;  --fs-24: 1.5rem;
+  --fs-28: 1.75rem;  --fs-32: 2rem;      --fs-40: 2.5rem;   --fs-48: 3rem;
+  --fs-64: 4rem;     --fs-80: 5rem;
+
+  --lh-tight: 1.1; --lh-snug: 1.25; --lh-normal: 1.5; --lh-loose: 1.7;
+  --tracking-tight: -0.01em; --tracking-normal: 0; --tracking-wide: 0.08em; --tracking-wider: 0.16em;
+
+  /* Espaciado / radios / sombras */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px; --space-5: 24px;
+  --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px; --space-10: 128px;
+
+  --radius-0: 0; --radius-1: 2px; --radius-2: 4px; --radius-3: 6px; --radius-4: 8px; --radius-full: 9999px;
+
+  --shadow-1: 0 1px 0 rgba(57, 68, 75, 0.06);
+  --shadow-2: 0 2px 6px rgba(57, 68, 75, 0.08), 0 1px 0 rgba(57, 68, 75, 0.04);
+  --shadow-3: 0 8px 24px rgba(57, 68, 75, 0.10), 0 2px 4px rgba(57, 68, 75, 0.04);
+
+  --content-width: 1120px;
+  --content-width-wide: 1280px;
+  --content-width-narrow: 720px;
+}

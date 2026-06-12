@@ -1,0 +1,135 @@
+---
+/**
+ * TramiteForm — formulario para iniciar un trámite en línea.
+ * Selects con apariencia personalizada (appearance:none + chevron CSS).
+ */
+import Overline from './Overline.astro';
+import Button from './Button.astro';
+---
+<section class="tramite container">
+  <Overline>Trámites y servicios en línea</Overline>
+  <h1 class="tramite__title">Iniciar un trámite</h1>
+  <form class="tramite__form" action="#" method="post">
+    <div class="field">
+      <label class="field__label" for="tipo">Tipo de trámite</label>
+      <div class="select">
+        <select id="tipo" name="tipo">
+          <option>Copias certificadas</option>
+          <option>Consulta de expediente</option>
+          <option>Solicitud de información pública</option>
+        </select>
+        <span class="select__chevron" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="distrito">Distrito judicial</label>
+      <div class="select">
+        <select id="distrito" name="distrito">
+          <option>Saltillo · Primer distrito</option>
+          <option>Torreón · Segundo distrito</option>
+          <option>Monclova · Tercer distrito</option>
+        </select>
+        <span class="select__chevron" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="field field--full">
+      <label class="field__label" for="exp">Número de expediente</label>
+      <div class="affix">
+        <span class="affix__prefix">Exp.</span>
+        <input id="exp" name="expediente" class="input" placeholder="123/2026" />
+      </div>
+    </div>
+
+    <div class="tramite__actions">
+      <Button variant="outline">Cancelar</Button>
+      <Button variant="solid">Continuar</Button>
+    </div>
+  </form>
+</section>
+
+<style>
+  .tramite { padding-block: var(--space-8); }
+  .tramite__title { font: 400 var(--fs-48)/1.1 var(--font-display); color: var(--fg); margin: 10px 0 var(--space-7); }
+  .tramite__form {
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .field { display: flex; flex-direction: column; gap: 10px; }
+  .field--full { grid-column: 1 / -1; }
+  .field__label {
+    font: 700 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+  }
+
+  .input, .select select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    font: 400 var(--fs-14) var(--font-sans);
+    color: var(--fg);
+    border-radius: 0;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .input:focus, .select select:focus {
+    border-color: var(--info);
+    box-shadow: inset 0 -2px 0 0 var(--info);
+  }
+
+  /* Custom select */
+  .select { position: relative; }
+  .select select { appearance: none; -webkit-appearance: none; padding-right: 36px; cursor: pointer; }
+  .select__chevron {
+    position: absolute;
+    right: 14px; top: 50%;
+    width: 9px; height: 9px;
+    border-right: 1.5px solid var(--fg);
+    border-bottom: 1.5px solid var(--fg);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  /* Prefix affix */
+  .affix {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .affix:focus-within { border-color: var(--info); box-shadow: inset 0 -2px 0 0 var(--info); }
+  .affix__prefix {
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    font: 700 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+    background: var(--bg-muted);
+    border-right: 1px solid var(--border);
+  }
+  .affix .input { border: 0; background: transparent; }
+  .affix .input:focus { box-shadow: none; }
+
+  .tramite__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 640px) {
+    .tramite__form { grid-template-columns: 1fr; padding: 24px; }
+  }
+</style>

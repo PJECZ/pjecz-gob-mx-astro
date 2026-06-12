@@ -1,0 +1,13 @@
+---
+/**
+ * Badge — etiqueta categórica (materia / tipo de boletín).
+ * El color de fondo se pasa por prop para usar la familia ceremonial.
+ */
+interface Props {
+  color?: string;
+}
+const { color = 'var(--accent)' } = Astro.props;
+---
+<span class="badge" style={`background:${color}`}>
+  <slot />
+</span>

@@ -1,0 +1,20 @@
+---
+/**
+ * RuleLine — divisor de sección con ornamento de estrella institucional.
+ */
+interface Props {
+  ornament?: boolean;
+}
+const { ornament = true } = Astro.props;
+---
+{ornament ? (
+  <div class="rule-line">
+    <div class="rule-line__line"></div>
+    <img class="rule-line__star" src="/assets/star.png" alt="" />
+    <div class="rule-line__line"></div>
+  </div>
+) : (
+  <div class="rule-line rule-line--plain">
+    <div class="rule-line__line"></div>
+  </div>
+)}
