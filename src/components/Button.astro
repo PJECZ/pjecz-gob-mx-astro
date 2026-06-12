@@ -1,0 +1,18 @@
+---
+/**
+ * Button — botón / enlace institucional.
+ * Renderiza <a> si recibe `href`, de lo contrario <button>.
+ */
+interface Props {
+  variant?: 'solid' | 'outline' | 'light' | 'ghost' | 'link';
+  href?: string;
+  sm?: boolean;
+  class?: string;
+}
+const { variant = 'solid', href, sm = false, class: extra = '' } = Astro.props;
+const cls = ['btn', `btn--${variant}`, sm ? 'btn--sm' : '', extra].filter(Boolean).join(' ');
+const Tag = href ? 'a' : 'button';
+---
+<Tag class={cls} href={href}>
+  <slot />
+</Tag>

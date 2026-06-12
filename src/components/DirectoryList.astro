@@ -1,0 +1,60 @@
+---
+/**
+ * DirectoryList — listado de órganos y áreas del Poder Judicial.
+ */
+import Overline from './Overline.astro';
+import Button from './Button.astro';
+import { DIRECTORY } from '@data/site';
+---
+<section class="dir container">
+  <Overline>Directorio institucional</Overline>
+  <h2 class="dir__title">Órganos y áreas</h2>
+  <div class="dir__table">
+    {DIRECTORY.map((d) => (
+      <div class="dir-row">
+        <div class="dir-row__name">
+          <div class="dir-row__org">{d.name}</div>
+          <div class="dir-row__role">{d.role}</div>
+        </div>
+        <div class="dir-row__head">{d.head}</div>
+        <div class="dir-row__loc">
+          <span class="dir-row__loc-label">Sede</span>{d.loc}
+        </div>
+        <div class="dir-row__action">
+          <Button variant="link" sm href="#">Contactar</Button>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .dir { padding-block: var(--space-9); }
+  .dir__title { font: 400 var(--fs-40)/1.1 var(--font-display); color: var(--fg); margin: 10px 0 var(--space-7); }
+  .dir__table { border: 1px solid var(--border); }
+  .dir-row {
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1.3fr 0.8fr;
+    gap: var(--space-5);
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .dir-row:last-child { border-bottom: 0; }
+  .dir-row__org { font: 700 var(--fs-15)/1.3 var(--font-sans); color: var(--fg); }
+  .dir-row__role { font: 400 var(--fs-12)/1 var(--font-sans); color: var(--fg-subtle); margin-top: 4px; letter-spacing: .04em; }
+  .dir-row__head, .dir-row__loc { font: 400 var(--fs-13) var(--font-sans); color: var(--fg-muted); }
+  .dir-row__loc-label {
+    font: 700 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    margin-right: 8px;
+  }
+  .dir-row__action { text-align: right; }
+
+  @media (max-width: 760px) {
+    .dir-row { grid-template-columns: 1fr; gap: var(--space-2); }
+    .dir-row__action { text-align: left; margin-top: var(--space-2); }
+  }
+</style>

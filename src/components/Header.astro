@@ -1,0 +1,121 @@
+---
+/**
+ * Header institucional — franja de gobierno, lockup del escudo y nav primaria.
+ */
+import { NAV } from '@data/site';
+interface Props { current?: string; }
+const { current = 'home' } = Astro.props;
+---
+<header class="site-header">
+  <!-- Franja de utilidad del gobierno del estado -->
+  <div class="gov-strip">
+    <div class="container-wide gov-strip__inner">
+      <span>GOBIERNO DEL ESTADO DE COAHUILA DE ZARAGOZA</span>
+      <span class="gov-strip__links">
+        <a href="#">CONTACTO</a>
+        <a href="#">MAPA DEL SITIO</a>
+        <a href="#" aria-label="Ajustar tamaño de texto">A+ A−</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Fila del escudo -->
+  <div class="container-wide crest-row">
+    <a href="/" class="crest-lockup">
+      <img src="/assets/logo-horizontal.png" alt="Poder Judicial del Estado de Coahuila de Zaragoza" />
+    </a>
+    <form class="search" role="search" action="#">
+      <span class="search__icon" aria-hidden="true"></span>
+      <input type="search" placeholder="Buscar expediente, acuerdo…" aria-label="Buscar" />
+    </form>
+  </div>
+
+  <!-- Navegación primaria -->
+  <nav class="primary-nav" aria-label="Navegación principal">
+    <div class="container-wide primary-nav__inner">
+      {NAV.map((item) => (
+        <a
+          href={item.href}
+          class:list={['primary-nav__link', { 'is-active': current === item.id }]}
+          aria-current={current === item.id ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--border); background: var(--bg); }
+
+  .gov-strip {
+    background: var(--pj-black-100);
+    color: var(--pj-black-25);
+    padding: 8px 0;
+    font: 400 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wide);
+  }
+  .gov-strip__inner { display: flex; justify-content: space-between; align-items: center; }
+  .gov-strip__links { display: flex; gap: var(--space-5); }
+  .gov-strip__links a:hover { color: var(--pj-white); }
+
+  .crest-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: 22px;
+  }
+  .crest-lockup img { height: 60px; width: auto; }
+
+  .search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border-strong);
+    padding: 8px 12px;
+    min-width: 280px;
+  }
+  .search__icon {
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--fg-faint);
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .search__icon::after {
+    content: "";
+    position: absolute;
+    width: 7px; height: 1.5px;
+    background: var(--fg-faint);
+    bottom: -3px; right: -4px;
+    transform: rotate(45deg);
+  }
+  .search input {
+    border: 0; outline: none; background: transparent;
+    font: 400 var(--fs-14) var(--font-sans);
+    color: var(--fg);
+    width: 100%;
+  }
+  .search input::placeholder { color: var(--fg-faint); }
+
+  .primary-nav { border-top: 1px solid var(--border-faint); background: var(--bg-muted); }
+  .primary-nav__inner { display: flex; flex-wrap: wrap; }
+  .primary-nav__link {
+    padding: 16px 20px;
+    font: 700 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .primary-nav__link:hover { color: var(--fg); }
+  .primary-nav__link.is-active { color: var(--fg); border-bottom-color: var(--accent); }
+
+  @media (max-width: 760px) {
+    .crest-row { flex-wrap: wrap; }
+    .search { min-width: 100%; margin-left: 0; }
+    .primary-nav__link { padding: 12px 14px; }
+  }
+</style>

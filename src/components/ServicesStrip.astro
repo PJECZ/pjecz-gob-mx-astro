@@ -1,0 +1,50 @@
+---
+/**
+ * ServicesStrip — accesos a servicios al ciudadano en rejilla de 4.
+ */
+import Overline from './Overline.astro';
+import { SERVICES } from '@data/site';
+---
+<section class="services">
+  <div class="container-wide">
+    <Overline>Servicios al ciudadano</Overline>
+    <div class="services__grid">
+      {SERVICES.map((s) => (
+        <a class="service" href={s.href}>
+          <img class="service__star" src="/assets/star.png" alt="" aria-hidden="true" />
+          <div class="service__title">{s.title}</div>
+          <div class="service__desc">{s.desc}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--bg-muted);
+    padding: var(--space-8) 0;
+    border-top: 1px solid var(--border-faint);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: var(--space-5);
+    border: 1px solid var(--border);
+  }
+  .service {
+    background: var(--bg-muted);
+    padding: var(--space-6) 28px;
+    transition: background .2s ease;
+  }
+  .service:hover { background: var(--bg); }
+  .service__star { height: 20px; margin-bottom: 18px; opacity: .85; }
+  .service__title { font: 400 var(--fs-24)/1.2 var(--font-display); color: var(--fg); margin-bottom: var(--space-2); }
+  .service__desc { font: 400 var(--fs-13)/1.55 var(--font-sans); color: var(--fg-muted); }
+
+  @media (max-width: 860px) { .services__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .services__grid { grid-template-columns: 1fr; } }
+</style>

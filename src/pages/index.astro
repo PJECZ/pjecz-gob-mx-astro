@@ -1,8 +1,13 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
-
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import ServicesStrip from '@components/ServicesStrip.astro';
+import NewsGrid from '@components/NewsGrid.astro';
+import QuoteBlock from '@components/QuoteBlock.astro';
 ---
-
-<MainLayout title="Poder Judicial del Estado de Coahuila de Zaragoza">
-    <h1 class="text-3xl text-blue-500">Hola mundo</h1>
-</MainLayout>
+<BaseLayout current="home">
+  <Hero />
+  <ServicesStrip />
+  <NewsGrid limit={6} />
+  <QuoteBlock />
+</BaseLayout>
