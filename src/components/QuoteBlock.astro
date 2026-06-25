@@ -1,35 +1,33 @@
 ---
 /**
- * QuoteBlock — cita ceremonial sobre fondo sage con patrón de estrellas.
+ * QuoteBlock 
  */
 ---
-<section class="quote">
-  <img class="quote__pattern" src="/assets/pattern-stars-sage.png" alt="" aria-hidden="true" />
-  <div class="quote__inner">
-    <img class="quote__star" src="/assets/star.png" alt="" aria-hidden="true" />
-    <blockquote class="quote__text">
+
+<section class="relative bg-[#C6CDBE] py-20 px-6 overflow-hidden">
+  <!-- Patrón de estrellas de fondo institucional -->
+  <img 
+    class="absolute inset-0 w-full h-full object-cover opacity-70 pointer-events-none" 
+    src="/assets/pattern-stars-sage.png" 
+    alt="" 
+    aria-hidden="true" 
+  />
+  
+  <div class="relative max-w-4xl mx-auto text-center">
+    <!-- Icono de estrella central -->
+    <img 
+      class="h-10 mx-auto mb-6 opacity-90" 
+      src="/assets/star.png" 
+      alt="" 
+      aria-hidden="true" 
+    />
+    
+    <blockquote class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-snug m-0 tracking-tight">
       “La justicia es la constante y perpetua voluntad de dar a cada quien lo que le corresponde.”
     </blockquote>
-    <div class="quote__cite">ULPIANO · DIGESTO, 1, 1, 10</div>
+    
+    <div class="text-[11px] uppercase tracking-[0.22em] text-gray-700 mt-6 font-sans font-medium">
+      ULPIANO · DIGESTO, 1, 1, 10
+    </div>
   </div>
 </section>
-
-<style>
-  .quote { position: relative; background: var(--pj-mist); padding: var(--space-9) var(--space-6); overflow: hidden; }
-  .quote__pattern { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .7; }
-  .quote__inner { position: relative; max-width: 880px; margin: 0 auto; text-align: center; }
-  .quote__star { height: 40px; margin: 0 auto var(--space-6); }
-  .quote__text {
-    font: 400 var(--fs-40)/1.25 var(--font-display);
-    color: var(--fg);
-    margin: 0;
-    letter-spacing: -.005em;
-  }
-  .quote__cite {
-    font: 400 var(--fs-12)/1 var(--font-sans);
-    letter-spacing: .22em;
-    color: var(--fg-muted);
-    margin-top: var(--space-5);
-  }
-  @media (max-width: 560px) { .quote__text { font-size: var(--fs-28); } }
-</style>

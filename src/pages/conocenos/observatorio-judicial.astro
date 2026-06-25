@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+---
+
+<BaseLayout title="Observatorio Judicial | Poder Judicial del Estado de Coahuila de Zaragoza">
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    
+    <!-- Sección de Imagen y Título -->
+    <header class="mb-12">
+      <div class="mb-8">
+        <img src="/assets/Hd-observatorio-jud.jpg" alt="Observatorio Judicial Coahuila" class="max-w-full h-auto mb-4" />
+      </div>
+      <h1 class="text-4xl font-serif text-slate-900 mb-6">Observatorio judicial ciudadano</h1>
+      <p class="text-lg text-slate-700 max-w-4xl">
+        Es un órgano colegiado ciudadanizado de consulta y apoyo del Poder Judicial del Estado de Coahuila de Zaragoza, con autonomía de operación, adscrito a la Presidencia del Tribunal Superior de Justicia del Estado.
+      </p>
+    </header>
+
+<!-- Grid de Navegación -->
+<nav class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+  {[
+    { title: "Misión", icon: "Mision" },
+    { title: "¿Cómo fue creado?", icon: "creacion" },
+    { title: "Integración", icon: "Integracion" },
+    { title: "¿Qué hacemos?", icon: "Que-hacemos" },
+    { title: "Encuestas", icon: "Encuestas" },
+    { title: "Capítulos Regionales", icon: "capitulos" },
+    { title: "Aliados", icon: "Aliados" },
+    { title: "Preguntas frecuentes", icon: "Preguntas-frecuentes" },
+  ].map((item) => (
+    <a href={`/observatorio/${item.icon.toLowerCase()}`} class="flex flex-col items-center text-center transition-transform hover:scale-105">
+      <div class="w-24 h-24 mb-4 flex items-center justify-center">
+        <!-- Imágenes desde la carpeta /public/assets/ -->
+        <img src={`/assets/${item.icon}.png`} alt={item.title} class="w-full h-full object-contain" />
+      </div>
+      <span class="font-bold text-slate-800 text-lg leading-tight">{item.title}</span>
+    </a>
+  ))}
+</nav>
+  </main>
+</BaseLayout>

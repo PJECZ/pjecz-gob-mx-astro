@@ -2,16 +2,18 @@
 /**
  * ServicesStrip — accesos a servicios al ciudadano en rejilla de 4.
  */
-import Overline from './Overline.astro';
 import { SERVICES } from '@data/site';
 ---
 <section class="services">
-  <div class="container-wide">
-    <Overline>Servicios al ciudadano</Overline>
+  <div class="services__internal-wrapper">
+    <div class="services__overline-title">ACCESOS DIRECTOS</div>
+    
     <div class="services__grid">
       {SERVICES.map((s) => (
         <a class="service" href={s.href}>
-          <img class="service__star" src="/assets/star.png" alt="" aria-hidden="true" />
+          <div class="service__star-container">
+            <img class="service__star" src="/assets/star.png" alt="" aria-hidden="true" />
+          </div>
           <div class="service__title">{s.title}</div>
           <div class="service__desc">{s.desc}</div>
         </a>
@@ -21,30 +23,118 @@ import { SERVICES } from '@data/site';
 </section>
 
 <style>
+  /* 1. SECCIÓN CONTENEDORA GENERAL */
   .services {
-    background: var(--bg-muted);
-    padding: var(--space-8) 0;
-    border-top: 1px solid var(--border-faint);
-    border-bottom: 1px solid var(--border-faint);
+    display: block !important;
+    background: #f6f6f4 !important; 
+    padding: 4rem 0 !important;
+    border-top: 1px solid #e2e8f0 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
-  .services__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border);
-    margin-top: var(--space-5);
-    border: 1px solid var(--border);
-  }
-  .service {
-    background: var(--bg-muted);
-    padding: var(--space-6) 28px;
-    transition: background .2s ease;
-  }
-  .service:hover { background: var(--bg); }
-  .service__star { height: 20px; margin-bottom: 18px; opacity: .85; }
-  .service__title { font: 400 var(--fs-24)/1.2 var(--font-display); color: var(--fg); margin-bottom: var(--space-2); }
-  .service__desc { font: 400 var(--fs-13)/1.55 var(--font-sans); color: var(--fg-muted); }
 
-  @media (max-width: 860px) { .services__grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 480px) { .services__grid { grid-template-columns: 1fr; } }
+  /* 2. ENVOLTORIO INTERNO SEGURO */
+  .services__internal-wrapper {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding-inline: 2rem !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  /* 3. TEXTO SUPERIOR */
+  .services__overline-title {
+    font-family: var(--font-sans, sans-serif) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    color: #6b7280 !important;
+    margin-bottom: 1.5rem !important;
+    text-align: left !important;
+  }
+  
+  
+  .services__grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1px !important; 
+    background: #d1d5db !important; 
+    margin-top: 1rem !important;
+    border: 1px solid #d1d5db !important; 
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+  
+ 
+  .service {
+    display: flex !important;
+    flex-direction: column !important;
+    background: #f6f6f4 !important; 
+    padding: 2.5rem 2rem !important;
+    text-decoration: none !important;
+    transition: background .2s ease !important;
+    box-sizing: border-box !important;
+  }
+  
+  .service:hover { 
+    background: #ffffff !important; 
+  }
+
+  
+  .service__star-container {
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    margin-bottom: 18px !important;
+    overflow: hidden !important;
+  }
+  
+  .service__star { 
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    object-fit: contain !important;
+    opacity: .85 !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* 7. TIPOGRAFÍAS */
+  .service__title { 
+    font-family: var(--font-display, Georgia, serif) !important;
+    font-weight: 400 !important;
+    font-size: 1.35rem !important;
+    line-height: 1.2 !important; 
+    color: #1a3129 !important; 
+    margin-bottom: 0.5rem !important; 
+  }
+  
+  .service__desc { 
+    font-family: var(--font-sans, sans-serif) !important;
+    font-weight: 400 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.55 !important; 
+    color: #4b5563 !important; 
+  }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 860px) { 
+    .services__grid { 
+      grid-template-columns: repeat(2, 1fr) !important; 
+    } 
+  }
+  
+  @media (max-width: 520px) { 
+    .services__grid { 
+      grid-template-columns: 1fr !important; 
+    } 
+  }
 </style>

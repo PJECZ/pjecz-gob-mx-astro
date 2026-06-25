@@ -1,7 +1,7 @@
 ---
 /**
  * BaseLayout — documento HTML con Header + slot + Footer.
- * Importa los estilos globales (tokens + base) una sola vez.
+ * Incluye CDN de Font Awesome 6 para los iconos de redes sociales y accesos directos.
  */
 import '@styles/tokens.css';
 import '@styles/global.css';
@@ -13,6 +13,7 @@ interface Props {
   description?: string;
   current?: string;
 }
+
 const {
   title = 'Poder Judicial del Estado de Coahuila de Zaragoza',
   description = 'Portal oficial del Tribunal Superior de Justicia y del Consejo de la Judicatura del Estado de Coahuila de Zaragoza.',
@@ -27,12 +28,34 @@ const {
   <meta name="description" content={description} />
   <link rel="icon" type="image/png" href="/assets/star.png" />
   <title>{title}</title>
+
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" 
+  />
+
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<body class="min-h-screen flex flex-col bg-white text-gray-800">
   <Header current={current} />
-  <main>
+  
+  <main class="flex-1">
     <slot />
   </main>
+  
   <Footer />
+
+  <style is:global>
+    /* Forzado absoluto: Rompe cualquier color previo y obliga a que los glifos de Font Awesome sean blancos */
+    body .fa-brands, 
+    body .fa-solid,
+    body i[class*="fa-"] {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important; /* Fuerza compatibilidad en navegadores Webkit */
+    }
+  </style>
 </body>
 </html>

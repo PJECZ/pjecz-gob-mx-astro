@@ -1,22 +1,65 @@
 /**
  * Datos del sitio — navegación, boletines, directorio, footer y secciones.
- * Centralizado para que el contenido se edite sin tocar los componentes.
  */
 
-export interface NavItem {
-  id: string;
+export interface SubNavItem {
   label: string;
   href: string;
 }
 
+export interface NavItem {
+  id: string;
+  title: string;
+  href?: string;
+  hasDropdown: boolean;
+  items?: SubNavItem[]; 
+}
+
 export const NAV: NavItem[] = [
-  { id: 'home',          label: 'Inicio',         href: '/' },
-  { id: 'boletin',       label: 'Boletín',        href: '/boletin' },
-  { id: 'directorio',    label: 'Directorio',     href: '/directorio' },
-  { id: 'transparencia', label: 'Transparencia',  href: '/transparencia' },
-  { id: 'tramites',      label: 'Trámites',       href: '/tramites' },
+  {
+    id: 'conocenos',
+    title: 'Conócenos',
+    hasDropdown: true,
+    items: [
+      { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos/' },
+      { label: 'Estructura', href: '/conocenos/estructura/' },
+      { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial/' }
+    ]
+  },
+  {
+    id: 'consultas',
+    title: 'Consultas',
+    hasDropdown: true,
+    items: [
+      /* Ruta oficial y limpia hacia tu nuevo componente dinámico de acuerdos */
+      { label: 'Acuerdos del Consejo', href: '/acuerdos' },
+      { label: 'Acuerdos del Pleno', href: '#/acuerdos' },
+      { label: 'Agenda de Audiencias', href: '#/agenda' },
+      { label: 'Edictos en Línea', href: '#/edictos' },
+      { label: 'Listas de Acuerdo', href: '#/listas' },
+      { label: 'Tesis y Jurisprudencia', href: '#/tesis' },
+      { label: 'Tramites y servicios', href: '#/tesis' },
+      { label: 'Versión Pública de Sentencias', href: '#/tesis' },
+    ]
+  },
+  {
+    id: 'prensa',
+    title: 'Sala de Prensa',
+    hasDropdown: true,
+    items: [
+      { label: 'Boletines', href: '#/prensa-boletines' },
+      { label: 'Calendario de Labores', href: '#/calendario' },
+      { label: 'Comunicados', href: '#/comunicados' },
+      { label: 'Entrevistas', href: '#/entrevistas' },
+      { label: 'Noticias', href: '#/noticias' },
+      { label: 'News Letters', href: '#/newsletters' }
+    ]
+  },
+  { id: 'transparencia', title: 'Transparencia', href: '/transparencia', hasDropdown: false },
+  { id: 'estudiantes', title: 'Estudiantes', href: '/estudiantes', hasDropdown: false }
 ];
 
+// 2. Sección de Avisos y Acuerdos
 export interface NewsItem {
   slug: string;
   cat: string;
@@ -35,6 +78,7 @@ export const NEWS: NewsItem[] = [
   { slug: 'informe-anual-labores-2025', cat: 'INSTITUCIONAL', color: '#4B5760', date: '18 ABR 2026', title: 'Informe anual de labores 2025', excerpt: 'Disponible para consulta pública en la sección de Transparencia.' },
 ];
 
+// 3. Accesos Directos
 export interface Service {
   title: string;
   desc: string;
@@ -42,12 +86,13 @@ export interface Service {
 }
 
 export const SERVICES: Service[] = [
-  { title: 'Consulta de expedientes', desc: 'Acceso a actuaciones por número y año.', href: '/tramites' },
-  { title: 'Agenda de audiencias',    desc: 'Horarios y salas por juzgado y distrito.', href: '/tramites' },
-  { title: 'Trámites en línea',       desc: 'Solicitudes, copias certificadas y más.', href: '/tramites' },
-  { title: 'Transparencia',           desc: 'Información pública, informes y normativa.', href: '/transparencia' },
+  { title: 'Poder en Línea v2.0', desc: 'Expediente Virtual, Buzón Electrónico, Sistema de Citas y Boletas Electrónicas.', href: 'https://poderenlinea.gob.mx/auth/login' },
+  { title: 'Sistema de citas', desc: 'En esta sección puedes agendar tu visita a nuestros órganos jurisdiccionales.', href: 'https://citas.saji.gob.mx/' },
+  { title: 'Listas de acuerdo', desc: 'Este apartado muestra el listado en donde se incluyen autos, acuerdos, sentencias.', href: '/listas-acuerdo' },
+  { title: 'Protocolo de acceso', desc: 'De actuación para garantizar el Acceso a la Justicia a las Personas con Discapacidad.', href: '#/protocolo' },
 ];
 
+// 4. Directorio Institucional
 export interface DirectoryEntry {
   name: string;
   role: string;
@@ -69,6 +114,7 @@ export const TRANSPARENCIA: string[] = [
   'Nombramientos', 'Normativa interna', 'Aviso de privacidad',
 ];
 
+// 5. Columnas del Footer
 export interface FooterColumn {
   title: string;
   items: string[];

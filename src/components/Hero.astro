@@ -1,24 +1,35 @@
 ---
-/**
- * Hero ceremonial — titular serif sobre fondo ink con patrón de laurel.
- */
 import Button from './Button.astro';
 ---
+
 <section class="hero">
-  <img class="hero__pattern" src="/assets/pattern-laurel-dark.png" alt="" aria-hidden="true" />
+  <img 
+    class="hero__pattern" 
+    src="/assets/pattern-laurel-dark.png" 
+    alt="" 
+    aria-hidden="true" 
+    loading="eager"
+  />
+  
   <div class="container-wide hero__inner">
     <div class="hero__copy">
-      <p class="hero__eyebrow">Poder Judicial del Estado de Coahuila de Zaragoza</p>
+      <div class="hero__eyebrow-box">
+        <span class="hero__eyebrow-text">Poder Judicial del Estado de Coahuila de Zaragoza</span>
+      </div>
+      
       <h1 class="hero__title">Justicia pronta,<br />completa e imparcial.</h1>
+      
       <p class="hero__lede">
         Portal oficial del Tribunal Superior de Justicia y del Consejo de la Judicatura del Estado.
         Consulte acuerdos, trámites y servicios con plena transparencia.
       </p>
+      
       <div class="hero__actions">
         <Button variant="light" href="/tramites">Iniciar trámite</Button>
         <Button variant="ghost" href="/boletin">Boletín judicial</Button>
       </div>
     </div>
+    
     <div class="hero__mark">
       <img src="/assets/logo-vertical-white.png" alt="" aria-hidden="true" />
     </div>
@@ -26,8 +37,23 @@ import Button from './Button.astro';
 </section>
 
 <style>
-  .hero { position: relative; background: var(--pj-ink); color: var(--pj-white); overflow: hidden; }
-  .hero__pattern { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; }
+  .hero { 
+    position: relative; 
+    background-color: var(--pj-ink); 
+    color: var(--fg-inverse); 
+    overflow: hidden; 
+  }
+
+  .hero__pattern { 
+    position: absolute; 
+    inset: 0; 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    opacity: .35; 
+    pointer-events: none;
+  }
+
   .hero__inner {
     position: relative;
     padding-block: var(--space-9) 112px;
@@ -36,31 +62,63 @@ import Button from './Button.astro';
     gap: var(--space-8);
     align-items: center;
   }
-  .hero__eyebrow {
-    font: 400 var(--fs-12)/1 var(--font-sans);
-    letter-spacing: .22em;
+
+  /* Contenedor limpio: sin línea */
+  .hero__eyebrow-box {
+    display: block;
+    margin-bottom: var(--space-4);
+    border: none;
+    padding: 0;
+  }
+
+  .hero__eyebrow-text {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--fs-12);
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--pj-mist);
-    margin-bottom: var(--space-5);
   }
-  .hero__title {
-    font: 400 var(--fs-64)/1.05 var(--font-display);
-    letter-spacing: -.005em;
-    margin-bottom: var(--space-5);
+
+  .hero__title { 
+    font: 400 var(--fs-64)/1.05 var(--font-display); 
+    letter-spacing: var(--tracking-tight); 
+    margin-bottom: var(--space-5); 
   }
-  .hero__lede {
-    font: 400 var(--fs-18)/1.5 var(--font-sans);
-    max-width: 520px;
-    color: var(--pj-mist);
-    margin-bottom: var(--space-6);
+
+  .hero__lede { 
+    font: 400 var(--fs-18)/var(--lh-normal) var(--font-sans); 
+    max-width: 520px; 
+    color: var(--pj-mist); 
+    margin-bottom: var(--space-6); 
   }
-  .hero__actions { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
-  .hero__mark { display: flex; justify-content: center; align-items: center; }
-  .hero__mark img { width: min(360px, 100%); opacity: .95; }
+
+  .hero__actions { 
+    display: flex; 
+    gap: var(--space-3); 
+    align-items: center; 
+    flex-wrap: wrap; 
+  }
+  
+  .hero__mark { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  
+  .hero__mark img { 
+    width: min(360px, 100%); 
+    opacity: .95; 
+  }
 
   @media (max-width: 860px) {
-    .hero__inner { grid-template-columns: 1fr; padding-block: var(--space-8); }
+    .hero__inner { 
+      grid-template-columns: 1fr; 
+      padding-block: var(--space-8); 
+      text-align: center; 
+    }
     .hero__title { font-size: var(--fs-48); }
+    .hero__actions { justify-content: center; }
     .hero__mark { display: none; }
   }
 </style>
