@@ -1,8 +1,5 @@
 ---
-/**
- * BaseLayout — documento HTML con Header + slot + Footer.
- * Incluye CDN de Font Awesome 6 para los iconos de redes sociales y accesos directos.
- */
+//Base Layout.astro
 import '@styles/tokens.css';
 import '@styles/global.css';
 import Header from '@components/Header.astro';
@@ -36,7 +33,6 @@ const {
     crossorigin="anonymous" 
     referrerpolicy="no-referrer" 
   />
-
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body class="min-h-screen flex flex-col bg-white text-gray-800">
@@ -45,16 +41,14 @@ const {
   <main class="flex-1">
     <slot />
   </main>
-  
   <Footer />
-
   <style is:global>
-    /* Forzado absoluto: Rompe cualquier color previo y obliga a que los glifos de Font Awesome sean blancos */
+   
     body .fa-brands, 
     body .fa-solid,
     body i[class*="fa-"] {
       color: #ffffff !important;
-      -webkit-text-fill-color: #ffffff !important; /* Fuerza compatibilidad en navegadores Webkit */
+      -webkit-text-fill-color: #ffffff !important; 
     }
   </style>
 </body>

@@ -4,7 +4,8 @@
 
 export interface SubNavItem {
   label: string;
-  href: string;
+  href?: string;
+  children?: SubNavItem[]; 
 }
 
 export interface NavItem {
@@ -12,7 +13,7 @@ export interface NavItem {
   title: string;
   href?: string;
   hasDropdown: boolean;
-  items?: SubNavItem[]; 
+  items?: SubNavItem[];
 }
 
 export const NAV: NavItem[] = [
@@ -21,9 +22,9 @@ export const NAV: NavItem[] = [
     title: 'Conócenos',
     hasDropdown: true,
     items: [
-      { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos/' },
-      { label: 'Estructura', href: '/conocenos/estructura/' },
-      { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial/' }
+      { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos' },
+      { label: 'Estructura', href: '/conocenos/estructura' },
+      { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial' }
     ]
   },
   {
@@ -31,15 +32,14 @@ export const NAV: NavItem[] = [
     title: 'Consultas',
     hasDropdown: true,
     items: [
-      /* Ruta oficial y limpia hacia tu nuevo componente dinámico de acuerdos */
-      { label: 'Acuerdos del Consejo', href: '/acuerdos' },
-      { label: 'Acuerdos del Pleno', href: '#/acuerdos' },
-      { label: 'Agenda de Audiencias', href: '#/agenda' },
-      { label: 'Edictos en Línea', href: '#/edictos' },
-      { label: 'Listas de Acuerdo', href: '#/listas' },
-      { label: 'Tesis y Jurisprudencia', href: '#/tesis' },
-      { label: 'Tramites y servicios', href: '#/tesis' },
-      { label: 'Versión Pública de Sentencias', href: '#/tesis' },
+      { label: 'Acuerdos del Consejo', href: '#' },
+      { label: 'Acuerdos del Pleno', href: '#' },
+      { label: 'Agenda de Audiencias', href: '#' },
+      { label: 'Edictos en Línea', href: '#' },
+      { label: 'Listas de Acuerdo', href: '#' },
+      { label: 'Tesis y Jurisprudencia', href: '#' },
+      { label: 'Tramites y servicios', href: '#' },
+      { label: 'Versión Pública de Sentencias', href: '#' },
     ]
   },
   {
@@ -47,18 +47,29 @@ export const NAV: NavItem[] = [
     title: 'Sala de Prensa',
     hasDropdown: true,
     items: [
-      { label: 'Boletines', href: '#/prensa-boletines' },
-      { label: 'Calendario de Labores', href: '#/calendario' },
-      { label: 'Comunicados', href: '#/comunicados' },
-      { label: 'Entrevistas', href: '#/entrevistas' },
-      { label: 'Noticias', href: '#/noticias' },
-      { label: 'News Letters', href: '#/newsletters' }
+      { label: 'Boletines', href: '#' },
+      { label: 'Calendario de Labores', href: '#' },
+      { label: 'Comunicados', href: '#' },
+      { label: 'Entrevistas', href: '#' },
+      { label: 'Noticias', href: '#' },
+      { label: 'News Letters', href: '#' },
+      { 
+        label: 'Sesiones', 
+        href: '#', 
+        children: [
+          { label: 'Pleno del TSJ', href: '#' },
+          { label: 'Sala Civil y Mercantil', href: '#' },
+          { label: 'Sala Familiar', href: '#' },
+          { label: 'Sala Penal', href: '#' },
+          { label: 'Sala Regional', href: '#' },
+          { label: 'Tribunal Constitucional', href: '#' },
+        ]
+      }
     ]
   },
-  { id: 'transparencia', title: 'Transparencia', href: '/transparencia', hasDropdown: false },
-  { id: 'estudiantes', title: 'Estudiantes', href: '/estudiantes', hasDropdown: false }
+  { id: 'transparencia', title: 'Transparencia', href: '#', hasDropdown: false },
+  { id: 'estudiantes', title: 'Estudiantes', href: '#', hasDropdown: false }
 ];
-
 // 2. Sección de Avisos y Acuerdos
 export interface NewsItem {
   slug: string;
@@ -88,7 +99,7 @@ export interface Service {
 export const SERVICES: Service[] = [
   { title: 'Poder en Línea v2.0', desc: 'Expediente Virtual, Buzón Electrónico, Sistema de Citas y Boletas Electrónicas.', href: 'https://poderenlinea.gob.mx/auth/login' },
   { title: 'Sistema de citas', desc: 'En esta sección puedes agendar tu visita a nuestros órganos jurisdiccionales.', href: 'https://citas.saji.gob.mx/' },
-  { title: 'Listas de acuerdo', desc: 'Este apartado muestra el listado en donde se incluyen autos, acuerdos, sentencias.', href: '/listas-acuerdo' },
+  { title: 'Listas de acuerdo', desc: 'Este apartado muestra el listado en donde se incluyen autos, acuerdos, sentencias...', href: '#/listas-acuerdo' },
   { title: 'Protocolo de acceso', desc: 'De actuación para garantizar el Acceso a la Justicia a las Personas con Discapacidad.', href: '#/protocolo' },
 ];
 

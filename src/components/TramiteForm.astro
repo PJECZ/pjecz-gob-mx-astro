@@ -21,7 +21,6 @@ import Button from './Button.astro';
         <span class="select__chevron" aria-hidden="true"></span>
       </div>
     </div>
-
     <div class="field">
       <label class="field__label" for="distrito">Distrito judicial</label>
       <div class="select">
@@ -33,7 +32,6 @@ import Button from './Button.astro';
         <span class="select__chevron" aria-hidden="true"></span>
       </div>
     </div>
-
     <div class="field field--full">
       <label class="field__label" for="exp">Número de expediente</label>
       <div class="affix">
@@ -41,14 +39,12 @@ import Button from './Button.astro';
         <input id="exp" name="expediente" class="input" placeholder="123/2026" />
       </div>
     </div>
-
     <div class="tramite__actions">
       <Button variant="outline">Cancelar</Button>
       <Button variant="solid">Continuar</Button>
     </div>
   </form>
 </section>
-
 <style>
   .tramite { padding-block: var(--space-8); }
   .tramite__title { font: 400 var(--fs-48)/1.1 var(--font-display); color: var(--fg); margin: 10px 0 var(--space-7); }

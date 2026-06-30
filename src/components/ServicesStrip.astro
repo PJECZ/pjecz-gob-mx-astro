@@ -1,140 +1,35 @@
 ---
-/**
- * ServicesStrip — accesos a servicios al ciudadano en rejilla de 4.
- */
 import { SERVICES } from '@data/site';
 ---
-<section class="services">
-  <div class="services__internal-wrapper">
-    <div class="services__overline-title">ACCESOS DIRECTOS</div>
+
+<section class="border-y border-gray-200 bg-[#f6f6f4] py-16">
+  <div class="mx-auto w-full max-w-7xl px-6">
+    <h2 class="mb-6 text-xs font-bold uppercase tracking-[0.15em] text-gray-500">
+      Accesos directos
+    </h2>
     
-    <div class="services__grid">
+    <div class="grid grid-cols-1 border border-gray-300 bg-gray-300 gap-[1px] md:grid-cols-2 lg:grid-cols-4">
       {SERVICES.map((s) => (
-        <a class="service" href={s.href}>
-          <div class="service__star-container">
-            <img class="service__star" src="/assets/star.png" alt="" aria-hidden="true" />
+        <a 
+          href={s.href} 
+          class="group flex flex-col bg-[#f6f6f4] p-10 transition-colors duration-200 hover:bg-white"
+        >
+          <div class="mb-4 h-5 w-5 overflow-hidden">
+            <img 
+              src="/assets/star.png" 
+              alt="" 
+              aria-hidden="true" 
+              class="h-5 w-5 object-contain opacity-85" 
+            />
           </div>
-          <div class="service__title">{s.title}</div>
-          <div class="service__desc">{s.desc}</div>
+          <h3 class="mb-2 font-serif text-[1.35rem] leading-tight text-[#1a3129]">
+            {s.title}
+          </h3>
+          <p class="text-sm leading-relaxed text-gray-600">
+            {s.desc}
+          </p>
         </a>
       ))}
     </div>
   </div>
 </section>
-
-<style>
-  /* 1. SECCIÓN CONTENEDORA GENERAL */
-  .services {
-    display: block !important;
-    background: #f6f6f4 !important; 
-    padding: 4rem 0 !important;
-    border-top: 1px solid #e2e8f0 !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  /* 2. ENVOLTORIO INTERNO SEGURO */
-  .services__internal-wrapper {
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding-inline: 2rem !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-  }
-
-  /* 3. TEXTO SUPERIOR */
-  .services__overline-title {
-    font-family: var(--font-sans, sans-serif) !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.15em !important;
-    font-size: 0.75rem !important;
-    font-weight: 700 !important;
-    color: #6b7280 !important;
-    margin-bottom: 1.5rem !important;
-    text-align: left !important;
-  }
-  
-  
-  .services__grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 1px !important; 
-    background: #d1d5db !important; 
-    margin-top: 1rem !important;
-    border: 1px solid #d1d5db !important; 
-    box-sizing: border-box !important;
-    width: 100% !important;
-  }
-  
- 
-  .service {
-    display: flex !important;
-    flex-direction: column !important;
-    background: #f6f6f4 !important; 
-    padding: 2.5rem 2rem !important;
-    text-decoration: none !important;
-    transition: background .2s ease !important;
-    box-sizing: border-box !important;
-  }
-  
-  .service:hover { 
-    background: #ffffff !important; 
-  }
-
-  
-  .service__star-container {
-    display: block !important;
-    width: 20px !important;
-    height: 20px !important;
-    max-width: 20px !important;
-    max-height: 20px !important;
-    margin-bottom: 18px !important;
-    overflow: hidden !important;
-  }
-  
-  .service__star { 
-    display: block !important;
-    width: 20px !important;
-    height: 20px !important;
-    max-width: 20px !important;
-    max-height: 20px !important;
-    min-width: 20px !important;
-    min-height: 20px !important;
-    object-fit: contain !important;
-    opacity: .85 !important; 
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  
-  /* 7. TIPOGRAFÍAS */
-  .service__title { 
-    font-family: var(--font-display, Georgia, serif) !important;
-    font-weight: 400 !important;
-    font-size: 1.35rem !important;
-    line-height: 1.2 !important; 
-    color: #1a3129 !important; 
-    margin-bottom: 0.5rem !important; 
-  }
-  
-  .service__desc { 
-    font-family: var(--font-sans, sans-serif) !important;
-    font-weight: 400 !important;
-    font-size: 0.875rem !important;
-    line-height: 1.55 !important; 
-    color: #4b5563 !important; 
-  }
-
-  /* RESPONSIVE DESIGN */
-  @media (max-width: 860px) { 
-    .services__grid { 
-      grid-template-columns: repeat(2, 1fr) !important; 
-    } 
-  }
-  
-  @media (max-width: 520px) { 
-    .services__grid { 
-      grid-template-columns: 1fr !important; 
-    } 
-  }
-</style>

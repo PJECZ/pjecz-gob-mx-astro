@@ -2,123 +2,42 @@
 import Button from './Button.astro';
 ---
 
-<section class="hero">
+<section class="relative overflow-hidden bg-[#2c3e50] text-white">
   <img 
-    class="hero__pattern" 
     src="/assets/pattern-laurel-dark.png" 
     alt="" 
     aria-hidden="true" 
-    loading="eager"
+    class="absolute inset-0 h-full w-full object-cover opacity-35"
   />
   
-  <div class="container-wide hero__inner">
-    <div class="hero__copy">
-      <div class="hero__eyebrow-box">
-        <span class="hero__eyebrow-text">Poder Judicial del Estado de Coahuila de Zaragoza</span>
-      </div>
+  <div class="relative mx-auto flex max-w-7xl items-end justify-between gap-12 px-6 py-16 md:py-24">
+    
+    <div class="flex max-w-2xl flex-col items-start text-left">
+      <span class="mb-4 block text-xs font-medium uppercase tracking-[0.22em] text-[#d1d5db]">
+        Poder Judicial del Estado de Coahuila de Zaragoza
+      </span>
       
-      <h1 class="hero__title">Justicia pronta,<br />completa e imparcial.</h1>
+      <h1 class="mb-5 text-5xl font-serif leading-[1.05] tracking-tight md:text-6xl">
+        Justicia pronta,<br />completa e imparcial.
+      </h1>
       
-      <p class="hero__lede">
-        Portal oficial del Tribunal Superior de Justicia y del Consejo de la Judicatura del Estado.
+      <p class="mb-8 text-lg text-[#d1d5db] leading-relaxed">
+        Portal oficial del Tribunal Superior de Justicia y del Consejo de la Judicatura del Estado. 
         Consulte acuerdos, trámites y servicios con plena transparencia.
       </p>
       
-      <div class="hero__actions">
+      <div class="flex flex-wrap gap-3">
         <Button variant="light" href="/tramites">Iniciar trámite</Button>
         <Button variant="ghost" href="/boletin">Boletín judicial</Button>
       </div>
     </div>
     
-    <div class="hero__mark">
-      <img src="/assets/logo-vertical-white.png" alt="" aria-hidden="true" />
+    <div class="hidden shrink-0 items-end md:flex">
+      <img 
+        src="/assets/logo-vertical-white.png" 
+        alt="Logo Institucional" 
+        class="w-[280px] object-contain opacity-95" 
+      />
     </div>
   </div>
 </section>
-
-<style>
-  .hero { 
-    position: relative; 
-    background-color: var(--pj-ink); 
-    color: var(--fg-inverse); 
-    overflow: hidden; 
-  }
-
-  .hero__pattern { 
-    position: absolute; 
-    inset: 0; 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    opacity: .35; 
-    pointer-events: none;
-  }
-
-  .hero__inner {
-    position: relative;
-    padding-block: var(--space-9) 112px;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: var(--space-8);
-    align-items: center;
-  }
-
-  /* Contenedor limpio: sin línea */
-  .hero__eyebrow-box {
-    display: block;
-    margin-bottom: var(--space-4);
-    border: none;
-    padding: 0;
-  }
-
-  .hero__eyebrow-text {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: var(--fs-12);
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--pj-mist);
-  }
-
-  .hero__title { 
-    font: 400 var(--fs-64)/1.05 var(--font-display); 
-    letter-spacing: var(--tracking-tight); 
-    margin-bottom: var(--space-5); 
-  }
-
-  .hero__lede { 
-    font: 400 var(--fs-18)/var(--lh-normal) var(--font-sans); 
-    max-width: 520px; 
-    color: var(--pj-mist); 
-    margin-bottom: var(--space-6); 
-  }
-
-  .hero__actions { 
-    display: flex; 
-    gap: var(--space-3); 
-    align-items: center; 
-    flex-wrap: wrap; 
-  }
-  
-  .hero__mark { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-  }
-  
-  .hero__mark img { 
-    width: min(360px, 100%); 
-    opacity: .95; 
-  }
-
-  @media (max-width: 860px) {
-    .hero__inner { 
-      grid-template-columns: 1fr; 
-      padding-block: var(--space-8); 
-      text-align: center; 
-    }
-    .hero__title { font-size: var(--fs-48); }
-    .hero__actions { justify-content: center; }
-    .hero__mark { display: none; }
-  }
-</style>
