@@ -35,11 +35,14 @@ export const NAV: NavItem[] = [
       { label: 'Acuerdos del Consejo', href: '#' },
       { label: 'Acuerdos del Pleno', href: '#' },
       { label: 'Agenda de Audiencias', href: '#' },
+      { label: 'Citas', href: '#' },
       { label: 'Edictos en Línea', href: '#' },
       { label: 'Listas de Acuerdo', href: '#' },
-      { label: 'Tesis y Jurisprudencia', href: '#' },
+      { label: 'Poder en línea', href: '#' },
+      { label: 'Tesis y Jurisprudencias', href: '#' },
       { label: 'Tramites y servicios', href: '#' },
       { label: 'Versión Pública de Sentencias', href: '#' },
+      { label: 'Más...', href: '#' },
     ]
   },
   {
@@ -47,7 +50,7 @@ export const NAV: NavItem[] = [
     title: 'Sala de Prensa',
     hasDropdown: true,
     items: [
-      { label: 'Boletines', href: '#' },
+      { label: 'Boletines Judiciales', href: '#' },
       { label: 'Calendario de Labores', href: '#' },
       { label: 'Comunicados', href: '#' },
       { label: 'Entrevistas', href: '#' },
@@ -67,7 +70,19 @@ export const NAV: NavItem[] = [
       }
     ]
   },
-  { id: 'transparencia', title: 'Transparencia', href: '#', hasDropdown: false },
+
+  {
+  id: 'transparencia',
+  title: 'Transparencia',
+  href: '#',
+  hasDropdown: true, 
+  items: [
+    { label: 'Transparencia', href: '#' },
+    { label: 'Transparencia Proactiva', href: '#' },
+    { label: 'Armonización Contable', href: '#' },
+  ]
+},
+
   { id: 'estudiantes', title: 'Estudiantes', href: '#', hasDropdown: false }
 ];
 // 2. Sección de Avisos y Acuerdos
