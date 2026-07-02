@@ -1,83 +1,52 @@
 ---
-// Componente de Cabecera Principal (Header) - Poder Judicial del Estado de Coahuila
-interface SubNavItem {
-  label: string;
-  href?: string;
-  children?: SubNavItem[]; 
-}
-interface NavItem {
-  id: string;
-  title: string;
-  href?: string;
-  items?: SubNavItem[];
-}
-interface SocialLink {
-  icon: string;
-  href: string;
-}
+//Header.Astro-PJECZ
+interface SubNavItem { label: string; href?: string; children?: SubNavItem[]; }
+interface NavItem { id: string; title: string; href?: string; items?: SubNavItem[]; }
+interface SocialLink { icon: string; href: string; }
+//Navbar y rutas (Actualmente solo aparece "Hola Mundo, seccion en construcción")
 const NAV: NavItem[] = [
-  {
-    id: 'conocenos',
-    title: 'Conócenos',
-    items: [
-      { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos' },
-      { label: 'Estructura', href: '/conocenos/estructura' },
-      { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial' }
-    ]
-  },
-  {
-    id: 'consultas',
-    title: 'Consultas',
-    items: [
-      { label: 'Acuerdos del Consejo', href: '/consultas/acuerdos-del-consejo' },
-      { label: 'Acuerdos del Pleno', href: '/consultas/acuerdos-del-pleno' },
-      { label: 'Agenda de Audiencias', href: '/consultas/agenda-audiencias' },
-      { label: 'Citas', href: '/consultas/citas' },
-      { label: 'Edictos en Línea', href: '/consultas/edictos' },
-      { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdo' },
-      { label: 'Poder en línea', href: '/consultas/poder-en-linea' },
-      { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-y-jurisprudencias' },
-      { label: 'Tramites y servicios', href: '/consultas/tramites-y-servicios' },
-      { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias' },
-      { label: 'Más...', href: '/consultas/consultas' }
-    ]
-  },
-  {
-    id: 'prensa',
-    title: 'Sala de Prensa',
-    items: [
-      { label: 'Boletines Judiciales', href: '/sala-de-prensa/boletines-judiciales' },
-      { label: 'Calendario de Labores', href: '/sala-de-prensa/calendario-de-labores' },
-      { label: 'Comunicados', href: '/sala-de-prensa/comunicados' },
-      { label: 'Entrevistas', href: '/sala-de-prensa/entrevistas' },
-      { label: 'Noticias', href: '/sala-de-prensa/noticias' },
-      { label: 'News Letters', href: '/sala-de-prensa/news-letter' },
-      { 
-        label: 'Sesiones',  
-        children: [
-          { label: 'Pleno del TSJ', href: '/sala-de-prensa/sesiones/pleno-del-tribunal-superior-de-justicia' },
-          { label: 'Sala Civil y Mercantil', href: '/sala-de-prensa/sesiones/sala-civil-y-mercantil' },
-          { label: 'Sala Familiar', href: '/sala-de-prensa/sesiones/familiar' },
-          { label: 'Sala Penal', href: '/sala-de-prensa/sesiones/penal' },
-          { label: 'Sala Regional', href: '/sala-de-prensa/sesiones/regional' },
-          { label: 'Tribunal Constitucional', href: '/sala-de-prensa/sesiones/tribunal-constitucional' }
-        ]
-      }
-    ]
-  },
-    {
-    id: 'transparencia',
-    title: 'Transparencia',
-    href: '#',
-    items: [
-      { label: 'Transparencia', href: '/transparencia/transparencia' },
-      { label: 'Transparencia Proactiva', href: '/transparencia/transparencia-proactiva' },
-      { label: 'Armonización Contable', href: '/transparencia/armonizacion-contable' }
-    ]
-  
-  },
-  { id: 'estudiantes', title: 'Estudiantes', href: 'estudiantes/justicia-para-ti' }
+  { id: 'conocenos', title: 'Conócenos', items: [
+    { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos' },
+    { label: 'Estructura', href: '/conocenos/estructura' },
+    { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial' }
+  ]},
+  { id: 'consultas', title: 'Consultas', items: [
+    { label: 'Acuerdos del Consejo', href: '/consultas/acuerdos-del-consejo' },
+    { label: 'Acuerdos del Pleno', href: '/consultas/acuerdos-del-pleno' },
+    { label: 'Agenda de Audiencias', href: '/consultas/agenda-audiencias' },
+    { label: 'Citas', href: '/consultas/citas' },
+    { label: 'Edictos en Línea', href: '/consultas/edictos' },
+    { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdo' },
+    { label: 'Poder en línea', href: '/consultas/poder-en-linea' },
+    { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-y-jurisprudencias' },
+    { label: 'Tramites y servicios', href: '/consultas/tramites-y-servicios' },
+    { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias' },
+    { label: 'Más...', href: '/consultas/consultas' }
+  ]},
+  { id: 'prensa', title: 'Sala de Prensa', items: [
+    { label: 'Boletines Judiciales', href: '/sala-de-prensa/boletines-judiciales' },
+    { label: 'Calendario de Labores', href: '/sala-de-prensa/calendario-de-labores' },
+    { label: 'Comunicados', href: '/sala-de-prensa/comunicados' },
+    { label: 'Entrevistas', href: '/sala-de-prensa/entrevistas' },
+    { label: 'Noticias', href: '/sala-de-prensa/noticias' },
+    { label: 'News Letters', href: '/sala-de-prensa/news-letter' },
+    { label: 'Sesiones', children: [
+      { label: 'Pleno del TSJ', href: '/sala-de-prensa/sesiones/pleno-del-tribunal-superior-de-justicia' },
+      { label: 'Sala Civil y Mercantil', href: '/sala-de-prensa/sesiones/sala-civil-y-mercantil' },
+      { label: 'Sala Familiar', href: '/sala-de-prensa/sesiones/familiar' },
+      { label: 'Sala Penal', href: '/sala-de-prensa/sesiones/penal' },
+      { label: 'Sala Regional', href: '/sala-de-prensa/sesiones/regional' },
+      { label: 'Tribunal Constitucional', href: '/sala-de-prensa/sesiones/tribunal-constitucional' }
+    ]}
+  ]},
+  { id: 'transparencia', title: 'Transparencia', items: [
+    { label: 'Transparencia', href: '/transparencia/transparencia' },
+    { label: 'Transparencia Proactiva', href: '/transparencia/transparencia-proactiva' },
+    { label: 'Armonización Contable', href: '/transparencia/armonizacion-contable' }
+  ]},
+  { id: 'estudiantes', title: 'Estudiantes', href: '/estudiantes/justicia-para-ti' }
 ];
+//Accesos directos a Redes Sociales (X,Facebook,Vimeo y Youtube) con Font Awesome
 const socialLinks: SocialLink[] = [
   { icon: 'fab fa-twitter', href: 'https://x.com/PJCoah' },
   { icon: 'fab fa-facebook-f', href: 'https://www.facebook.com/pjcoah/' },
@@ -102,23 +71,21 @@ const socialLinks: SocialLink[] = [
     <nav class="flex items-center space-x-8 py-3 pl-4 md:pl-16">
       {NAV.map((item) => (
         <div class="group relative flex h-full items-center">
-          {item.items && item.items.length > 0 ? (
+          {item.items ? (
             <>
-              <button class="flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-[11px] font-bold uppercase tracking-wider text-[#2c3e50] hover:text-black">
-                {item.title}
-                <span class="text-[8px] text-gray-400 transition-transform group-hover:text-black">▼</span>
+              <button class="flex cursor-pointer items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[#2c3e50] hover:text-black">
+                {item.title} <span class="text-[8px] text-gray-400 transition-transform group-hover:text-black">▼</span>
               </button>
               <div class="absolute top-full left-0 z-50 hidden w-52 rounded-b border border-gray-200 bg-white py-2 shadow-xl group-hover:block">
                 {item.items.map((sub) => (
                   <div class="group/submenu relative">
-                    <a href={sub.href || '#'} class="flex items-center justify-between px-4 py-2.5 text-[11px] font-medium uppercase tracking-wide text-gray-600 no-underline hover:bg-gray-100 hover:text-black">
-                      {sub.label}
-                      {sub.children && <span class="text-[8px]">▶</span>}
+                    <a href={sub.href || '#'} class="flex items-center justify-between px-4 py-2.5 text-[11px] font-medium uppercase tracking-wide text-gray-600 hover:bg-gray-100 hover:text-black">
+                      {sub.label} {sub.children && <span class="text-[8px]">▶</span>}
                     </a>
                     {sub.children && (
                       <div class="absolute top-0 left-full z-50 hidden w-56 rounded border border-gray-200 bg-white py-2 shadow-xl group-hover/submenu:block">
                         {sub.children.map((child) => (
-                          <a href={child.href} class="block px-4 py-2.5 text-[11px] font-medium uppercase tracking-wide text-gray-600 no-underline hover:bg-gray-100 hover:text-black">
+                          <a href={child.href} class="block px-4 py-2.5 text-[11px] font-medium uppercase tracking-wide text-gray-600 hover:bg-gray-100 hover:text-black">
                             {child.label}
                           </a>
                         ))}
@@ -129,7 +96,7 @@ const socialLinks: SocialLink[] = [
               </div>
             </>
           ) : (
-            <a href={item.href} class="text-[11px] font-bold uppercase tracking-wider text-[#2c3e50] no-underline hover:text-black">
+            <a href={item.href} class="text-[11px] font-bold uppercase tracking-wider text-[#2c3e50] hover:text-black">
               {item.title}
             </a>
           )}
@@ -137,34 +104,23 @@ const socialLinks: SocialLink[] = [
       ))}
     </nav>
     <div class="flex items-center border-l border-gray-200 bg-white px-6 shadow-[-4px_0_12px_rgba(0,0,0,0.02)] md:px-12">
-      <div class="google-search-wrapper w-64">
-        <div class="gcse-search"></div>
-      </div>
+      <div class="google-search-wrapper w-64"><div class="gcse-search"></div></div>
     </div>
   </div>
 </header>
+<!-- Buscador Programable de Google -->
 <script is:inline async src="https://cse.google.com/cse.js?cx=33664f175580b4923"></script>
 <script>
   interface CustomWindow extends Window {
-    google?: {
-      search?: {
-        cse: {
-          element: {
-            go: () => void;
-          };
-        };
-      };
-    };
+    google?: { search?: { cse: { element: { go: () => void; }; }; }; };
   }
   document.addEventListener('astro:page-load', () => {
     const w = window as CustomWindow;
-    if (w.google?.search) {
-      w.google.search.cse.element.go();
-    }
+    if (w.google?.search) w.google.search.cse.element.go();
   });
 </script>
 <style>
-  .google-search-wrapper { @apply flex h-[38px] w-full max-w-[280px] items-center justify-center bg-transparent p-0; }
+  .google-search-wrapper { @apply flex h-[38px] w-full max-w-[280px] items-center justify-center p-0; }
   .google-search-wrapper :global(.gsc-control-cse) { @apply w-full border-none bg-transparent p-0; }
   .google-search-wrapper :global(.gsc-input-box) { @apply m-0 h-full w-full border-none bg-transparent p-0 shadow-none; }
   .google-search-wrapper :global(input.gsc-input) { @apply m-0 h-full w-full bg-transparent px-2.5 text-[14px] text-gray-700; }

@@ -1,13 +1,13 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
-import ServicesStrip from '@components/QuickLinks.astro';
+import QuickLinks from '@components/QuickLinks.astro';
 import NewsGrid from '@components/NewsGrid.astro';
 import QuoteBlock from '@components/QuoteBlock.astro';
 ---
 <BaseLayout current="home">
   <Hero />
-  <ServicesStrip />
+  <QuickLinks />
   <NewsGrid limit={6} />
   <QuoteBlock />
 </BaseLayout>

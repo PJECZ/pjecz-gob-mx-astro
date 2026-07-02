@@ -1,5 +1,8 @@
 ---
-//Base Layout.astro
+/**
+ * BaseLayout — documento HTML con Header + slot + Footer.
+ * Importa los estilos globales (tokens + base) una sola vez.
+ */
 import '@styles/tokens.css';
 import '@styles/global.css';
 import Header from '@components/Header.astro';
@@ -10,7 +13,6 @@ interface Props {
   description?: string;
   current?: string;
 }
-
 const {
   title = 'Poder Judicial del Estado de Coahuila de Zaragoza',
   description = 'Portal oficial del Tribunal Superior de Justicia y del Consejo de la Judicatura del Estado de Coahuila de Zaragoza.',
@@ -25,31 +27,22 @@ const {
   <meta name="description" content={description} />
   <link rel="icon" type="image/png" href="/assets/star.png" />
   <title>{title}</title>
+<!-- Tailwind CSS v4 a través de CDN -->
+   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+   <!-- Enlace CDN para los iconos de redes sociales (Font Awesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
-    crossorigin="anonymous" 
-    referrerpolicy="no-referrer" 
-  />
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <style is:global>
+    .fa-brands, .fab, .fa-solid, .fas {
+      color: #ffffff !important;
+    }
+  </style>
 </head>
 <body class="min-h-screen flex flex-col bg-white text-gray-800">
   <Header current={current} />
-  
   <main class="flex-1">
     <slot />
   </main>
   <Footer />
-  <style is:global>
-   
-    body .fa-brands, 
-    body .fa-solid,
-    body i[class*="fa-"] {
-      color: #ffffff !important;
-      -webkit-text-fill-color: #ffffff !important; 
-    }
-  </style>
 </body>
 </html>

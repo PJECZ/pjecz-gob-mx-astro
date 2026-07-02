@@ -1,10 +1,22 @@
 ---
-/**
- * DirectoryList — listado de órganos y áreas del Poder Judicial.
- */
+// Componente (DirectoryList) - Poder Judicial del Estado de Coahuila
 import Overline from './Overline.astro';
 import Button from './Button.astro';
-import { DIRECTORY } from '@data/site';
+
+interface DirectoryEntry {
+  name: string;
+  role: string;
+  head: string;
+  loc: string;
+}
+const DIRECTORY: DirectoryEntry[] = [
+  { name: 'Tribunal Superior de Justicia', role: 'Pleno', head: 'Mag. Miriam Cárdenas Cantú', loc: 'Saltillo' },
+  { name: 'Consejo de la Judicatura', role: 'Órgano de gobierno', head: 'Mag. Luis Efrén Ríos Vega', loc: 'Saltillo' },
+  { name: 'Primer Distrito Judicial', role: 'Saltillo', head: 'Juez Presidente rotativo', loc: 'Saltillo' },
+  { name: 'Segundo Distrito Judicial', role: 'Torreón', head: 'Juez Presidente rotativo', loc: 'Torreón' },
+  { name: 'Tercer Distrito Judicial', role: 'Monclova', head: 'Juez Presidente rotativo', loc: 'Monclova' },
+  { name: 'Instituto de Especialización Judicial', role: 'Capacitación', head: 'Dirección General', loc: 'Saltillo' }
+];
 ---
 <section class="dir container">
   <Overline>Directorio institucional</Overline>
@@ -51,7 +63,6 @@ import { DIRECTORY } from '@data/site';
     margin-right: 8px;
   }
   .dir-row__action { text-align: right; }
-
   @media (max-width: 760px) {
     .dir-row { grid-template-columns: 1fr; gap: var(--space-2); }
     .dir-row__action { text-align: left; margin-top: var(--space-2); }

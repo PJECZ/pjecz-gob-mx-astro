@@ -1,31 +1,41 @@
 ---
-/**
- * NewsGrid — tarjetas de boletines / avisos recientes con Tailwind.
- */
+// Componente de Rejilla de Noticias (NewsGrid) - Poder Judicial del Estado de Coahuila
 import Overline from './Overline.astro';
 import Button from './Button.astro';
-import { NEWS } from '@data/site';
 
-interface Props { limit?: number; }
+interface NewsItem {
+  slug: string;
+  cat: string;
+  color: string;
+  date: string;
+  title: string;
+  excerpt: string;
+}
+interface Props {
+  limit?: number;
+}
+const NEWS: NewsItem[] = [
+  { slug: 'acuerdos-plenarios-abril', cat: 'BOLETÍN', color: '#39444B', date: '24 ABR 2026', title: 'Acuerdos plenarios del Tribunal Superior de Justicia', excerpt: 'Publicación de resoluciones correspondientes al mes en curso, con efectos a partir del lunes 28 de abril.' },
+  { slug: 'nueva-sede-civil-torreon', cat: 'CIVIL', color: '#323B6B', date: '23 ABR 2026', title: 'Nueva sede del Juzgado Cuarto de lo Civil en Torreón', excerpt: 'La nueva sede abrirá al público el próximo 5 de mayo con horario regular de ventanilla.' },
+  { slug: 'protocolo-atencion-familiar', cat: 'FAMILIAR', color: '#5F2D71', date: '22 ABR 2026', title: 'Protocolo de atención a usuarios en materia familiar', excerpt: 'Se actualizan los lineamientos para el acompañamiento a personas en situación de vulnerabilidad.' },
+  { slug: 'suspension-labores-1-mayo', cat: 'AVISO', color: '#486238', date: '21 ABR 2026', title: 'Suspensión de labores el 1 de mayo de 2026', excerpt: 'Por conmemoración del Día del Trabajo, no habrá actividad jurisdiccional ni administrativa.' },
+  { slug: 'capacitacion-sistema-acusatorio', cat: 'PENAL', color: '#9E3182', date: '20 ABR 2026', title: 'Capacitación continua en el sistema acusatorio', excerpt: 'Inscripciones abiertas para magistrados y personal jurisdiccional del primer distrito judicial.' },
+  { slug: 'informe-anual-labores-2025', cat: 'INSTITUCIONAL', color: '#4B5760', date: '18 ABR 2026', title: 'Informe anual de labores 2025', excerpt: 'Disponible para consulta pública en la sección de Transparencia.' }
+];
 const { limit } = Astro.props;
 const items = limit ? NEWS.slice(0, limit) : NEWS;
-
-
 const getTipoColor = (cat: string) => {
   switch (cat?.toLowerCase()) {
     case 'boletín': return 'bg-blue-900';
     case 'civil': return 'bg-blue-400'; 
     case 'familiar': return 'bg-purple-800';
-    case 'aviso': return 'bg-yellow-600'; 1
+    case 'aviso': return 'bg-yellow-600';
     case 'penal': return 'bg-red-700';
-    default: return 'bg-emerald-800'; // Para 'institucional' u otros
+    default: return 'bg-emerald-800'; 
   }
 };
 ---
-
 <section class="max-w-7xl mx-auto px-6 py-16">
-  
-  <!-- Encabezado de la sección -->
   <div class="flex flex-col md:flex-row items-start md:items-end justify-between border-b-2 border-[#1a3129] pb-4 mb-8 gap-4">
     <div>
       <div class="text-gray-500 uppercase tracking-widest text-xs font-bold">
@@ -37,30 +47,21 @@ const getTipoColor = (cat: string) => {
       <Button variant="link" href="/boletin">Ver todos →</Button>
     </div>
   </div>
-
-  <!-- Rejilla con tu diseño de tarjetas e identificadores de color -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {items.map((n) => (
-      <a 
-        href={`/boletin/${n.slug}`}
-        class="border border-gray-200 bg-white p-6 flex flex-col hover:shadow-md transition-shadow duration-200 group"
-      >
+      <a href={`/boletin/${n.slug}`} class="border border-gray-200 bg-white p-6 flex flex-col hover:shadow-md transition-shadow duration-200 group">
         <div class="flex items-center gap-2 mb-4">
-          <!-- Tu badge dinámico adaptado -->
           <span class={`text-white text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider ${getTipoColor(n.cat)}`}>
             {n.cat}
           </span>
           <span class="text-gray-400 text-xs tracking-wider uppercase">{n.date}</span>
         </div>
-        
         <h3 class="font-serif text-xl font-bold mb-2 text-gray-900 leading-snug group-hover:text-[#1a3129] transition-colors">
           {n.title}
         </h3>
-        
         <p class="text-sm text-gray-600 leading-relaxed mb-6 flex-grow">
           {n.excerpt}
         </p>
-        
         <div class="text-xs font-bold uppercase tracking-widest text-gray-900 group-hover:text-[#1a3129] transition-colors mt-auto">
           Leer más →
         </div>
