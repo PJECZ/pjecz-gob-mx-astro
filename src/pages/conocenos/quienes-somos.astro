@@ -1,65 +1,18 @@
 ---
+//Quienes Somos - Poder Judicial del Estado de Coahuila
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-import banner from '../../assets/img/quienes-somos/banner-quienes-somos.jpg';
-import iconoBienvenida from '../../assets/img/quienes-somos/bienvenida.png';
-import iconoModelo from '../../assets/img/quienes-somos/nuevo-modelo-j.png';
-import iconoMagistrados from '../../assets/img/quienes-somos/magistrados.png';
+const pageTitle = "Quienes Somos";
 ---
-
-<BaseLayout title="¿Quiénes somos? | Poder Judicial del Estado de Coahuila de Zaragoza">
-  <main class="max-w-7xl mx-auto px-6 py-12">
-    
-    <header class="mb-10">
-      <nav class="text-xs text-gray-500 uppercase tracking-widest mb-2" aria-label="Breadcrumb">
-        Conócenos / Quiénes somos
-      </nav>
-      <h1 class="text-4xl font-serif text-slate-900 mb-6">¿Quiénes somos?</h1>
-      
-      <figure class="relative w-full mb-8 overflow-hidden rounded-lg shadow-sm">
-        <img 
-          src={banner.src} 
-          alt="Nuevo Modelo de Justicia · Coahuila · La Justicia Contigo" 
-          class="w-full h-auto object-cover" 
-          width={banner.width}
-          height={banner.height}
-        />
-      </figure>
-    </header>
-
-    <section class="text-lg text-slate-700 leading-relaxed mb-12 max-w-4xl" aria-labelledby="descripcion-titulo">
-      <p>
-        En este portal web, además de describir nuestra estructura con sus distintos órganos jurisdiccionales, 
-        no jurisdiccionales y administrativos, así como la participación de un Observatorio judicial, 
-        te contamos brevemente de qué somos responsables por mandato constitucional; de nuestra 
-        transformación institucional con la descripción de un nuevo modelo de Justicia y de la 
-        presentación de los magistrados que integran este poder público.
+<BaseLayout title={pageTitle}>
+  <div class="flex min-h-[400px] w-full items-center justify-center bg-white px-4">
+    <div class="text-center">
+      <h1 class="font-serif text-3xl font-bold text-[#2c3e50] md:text-4xl">
+        Hola Mundo
+      </h1>
+      <p class="mt-2 text-sm tracking-wide text-gray-500 uppercase">
+        Sección en actualización.
       </p>
-    </section>
-
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 text-center" aria-label="Secciones relacionadas">
-      {[
-        { href: '/conocenos/bienvenida', img: iconoBienvenida, label: 'Bienvenida' },
-        { href: '/conocenos/nuevo-modelo', img: iconoModelo, label: 'Un nuevo modelo de Justicia' },
-        { href: '/conocenos/magistrados', img: iconoMagistrados, label: 'Magistrados' }
-      ].map(item => (
-        <a href={item.href} class="group flex flex-col items-center">
-          <div class="w-24 h-24 rounded-full border-2 border-transparent flex items-center justify-center mb-4 transition-all group-hover:scale-105 overflow-hidden">
-            <img src={item.img.src} alt="" class="w-full h-full object-cover" />
-          </div>
-          <h3 class="font-bold text-slate-900 uppercase text-sm tracking-widest group-hover:text-blue-900 transition-colors">
-            {item.label}
-          </h3>
-        </a>
-      ))}
-    </section>
-
-    <section class="bg-gray-50 p-6 mb-16 text-sm text-gray-600 italic border-l-4 border-gray-300">
-      <p>
-        *NOTA: Si por exigencias de construcción gramatical, enumeración, orden u otra circunstancia, 
-        el texto de esta página emplea el género masculino, deberá interpretarse ello en sentido 
-        igualitario para hombres y mujeres, de modo que prevalezca la equidad entre géneros.
-      </p>
-    </section>
-  </main>
+    </div>
+  </div>
 </BaseLayout>

@@ -1,0 +1,36 @@
+---
+// Componente de Accesos Directos (Quick Links) - Poder Judicial del Estado de Coahuila (para ser consistentes en el idioma)
+interface Service {
+  title: string;
+  desc: string;
+  href: string;
+}
+const QUICK_LINKS: Service[] = [
+  { title: 'Poder en Línea v2.0', desc: 'Expediente Virtual, Buzón Electrónico, Sistema de Citas y Boletas Electrónicas.', href: 'https://poderenlinea.gob.mx/auth/login' },
+  { title: 'Sistema de citas', desc: 'En esta sección puedes agendar tu visita a nuestros órganos jurisdiccionales.', href: 'https://citas.saji.gob.mx/' },
+  { title: 'Listas de acuerdo', desc: 'Este apartado muestra el listado en donde se incluyen autos, acuerdos, sentencias...', href: '#/listas-acuerdo' },
+  { title: 'Protocolo de acceso', desc: 'De actuación para garantizar el Acceso a la Justicia a las Personas con Discapacidad.', href: '#/protocolo' }
+];
+---
+<section class="border-y border-gray-200 bg-[#f6f6f4] py-16">
+  <div class="mx-auto w-full max-w-7xl px-6">
+    <h2 class="mb-6 text-xs font-bold uppercase tracking-[0.15em] text-gray-500">
+      Quick Links
+    </h2>
+    <div class="grid grid-cols-1 border border-gray-300 bg-gray-300 gap-[1px] md:grid-cols-2 lg:grid-cols-4">
+      {QUICK_LINKS.map((link) => (
+        <a href={link.href} class="group flex flex-col bg-[#f6f6f4] p-10 transition-colors duration-200 hover:bg-white">
+          <div class="mb-4 h-5 w-5 overflow-hidden">
+            <img src="/assets/star.png" alt="" aria-hidden="true" class="h-5 w-5 object-contain opacity-85" />
+          </div>
+          <h3 class="mb-2 font-serif text-[1.35rem] leading-tight text-[#1a3129]">
+            {link.title}
+          </h3>
+          <p class="text-sm leading-relaxed text-gray-600">
+            {link.desc}
+          </p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
