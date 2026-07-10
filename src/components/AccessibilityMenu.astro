@@ -1,0 +1,60 @@
+---
+// src/components/AccessibilityMenu.astro
+---
+<div class="fixed top-1/2 right-0 left-auto transform -translate-y-1/2 flex flex-col shadow-[-2px_2px_10px_rgba(0,0,0,0.3)] z-[9999]">
+  
+  <button id="dark-mode-toggle" class="w-[50px] h-[50px] bg-[#262626] border-none cursor-pointer flex items-center justify-center rounded-tl-md transition-all hover:brightness-110" title="Alternar modo oscuro">
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  
+  <button id="text-plus" class="w-[50px] h-[50px] bg-[#3b5998] text-white font-bold text-lg border-none cursor-pointer flex items-center justify-center transition-all hover:brightness-110" title="Aumentar tamaño de texto">
+    A+
+  </button>
+  
+  <button id="text-minus" class="w-[50px] h-[50px] bg-[#1da1f2] text-white font-bold text-lg border-none cursor-pointer flex items-center justify-center rounded-bl-md transition-all hover:brightness-110" title="Disminuir tamaño de texto">
+    A-
+  </button>
+  
+</div>
+
+<script>
+  // Escuchamos el evento de carga global de Astro para soportar transiciones entre páginas
+  document.addEventListener('astro:page-load', () => {
+    let currentFontSize = 100;
+
+    const body = document.body;
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const textPlusBtn = document.getElementById('text-plus');
+    const textMinusBtn = document.getElementById('text-minus');
+
+    // Manejo de Modo Oscuro
+    darkModeToggle?.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if (body.classList.contains('dark')) {
+        body.style.backgroundColor = '#1a1a1a';
+        body.style.color = '#eee';
+      } else {
+        body.style.backgroundColor = '#ffffff';
+        body.style.color = '#1f2937';
+      }
+    });
+
+    // Aumentar tamaño de texto
+    textPlusBtn?.addEventListener('click', () => {
+      if (currentFontSize < 140) {
+        currentFontSize += 10;
+        body.style.fontSize = currentFontSize + '%';
+      }
+    });
+
+    // Disminuir tamaño de texto
+    textMinusBtn?.addEventListener('click', () => {
+      if (currentFontSize > 80) {
+        currentFontSize -= 10;
+        body.style.fontSize = currentFontSize + '%';
+      }
+    });
+  });
+</script>
