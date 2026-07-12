@@ -44,7 +44,7 @@ const NAV: NavItem[] = [
     { label: 'Transparencia Proactiva', href: '/transparencia/transparencia-proactiva' },
     { label: 'Armonización Contable', href: '/transparencia/armonizacion-contable' }
   ]},
-  { id: 'estudiantes', title: 'Estudiantes', href: '/estudiantes/justicia-para-ti' }
+  { id: 'estudiantes', title: 'Estudiantes', href: '/justicia-para-ti/justicia-para-ti' }
 ];
 //Accesos directos a Redes Sociales (X,Facebook,Vimeo y Youtube) con Font Awesome
 const socialLinks: SocialLink[] = [
@@ -104,25 +104,32 @@ const socialLinks: SocialLink[] = [
       ))}
     </nav>
     <div class="flex items-center border-l border-gray-200 bg-white px-6 shadow-[-4px_0_12px_rgba(0,0,0,0.02)] md:px-12">
-      <div class="google-search-wrapper w-64"><div class="gcse-search"></div></div>
+      <div id="search-box-container" class="google-search-wrapper" data-astro-reload>
+        <div class="gcse-search" data-newWindow="false"></div>
+      </div>
     </div>
   </div>
 </header>
 <!-- Buscador Programable de Google -->
-<script is:inline async src="https://cse.google.com/cse.js?cx=33664f175580b4923"></script>
-<script>
-  interface CustomWindow extends Window {
-    google?: { search?: { cse: { element: { go: () => void; }; }; }; };
+<script is:inline>
+  function loadGoogleSearch() {
+    const oldScript = document.getElementById('google-cse-script');
+    if (oldScript) oldScript.remove();
+    const script = document.createElement('script');
+    script.id = 'google-cse-script';
+    script.async = true;
+    script.src = "https://cse.google.com/cse.js?cx=33664f175580b4923";
+    document.head.appendChild(script);
   }
-  document.addEventListener('astro:page-load', () => {
-    const w = window as CustomWindow;
-    if (w.google?.search) w.google.search.cse.element.go();
-  });
+  document.addEventListener('astro:page-load', loadGoogleSearch);
 </script>
 <style>
-  .google-search-wrapper { @apply flex h-[38px] w-full max-w-[280px] items-center justify-center p-0; }
-  .google-search-wrapper :global(.gsc-control-cse) { @apply w-full border-none bg-transparent p-0; }
-  .google-search-wrapper :global(.gsc-input-box) { @apply m-0 h-full w-full border-none bg-transparent p-0 shadow-none; }
-  .google-search-wrapper :global(input.gsc-input) { @apply m-0 h-full w-full bg-transparent px-2.5 text-[14px] text-gray-700; }
-  .google-search-wrapper :global(.gsc-search-button-v2) { @apply ml-2 flex h-[34px] cursor-pointer items-center justify-center rounded bg-[#2c3e50] px-3.5; }
+  .google-search-wrapper { @apply flex h-[38px] w-full max-w-[280px] items-center p-0 overflow-visible; }
+  .google-search-wrapper :global(.gsc-control-cse) { @apply w-full border-none bg-transparent p-0 m-0; }
+  .google-search-wrapper :global(.gsc-search-box) { @apply m-0 flex w-full items-center !important; }
+  .google-search-wrapper :global(.gsc-input-box) { @apply m-0 h-[34px] w-full border border-gray-300 rounded bg-white p-0 shadow-none flex items-center !important; }
+  .google-search-wrapper :global(input.gsc-input) { @apply m-0 h-full w-full bg-transparent px-2.5 text-[14px] text-gray-700 !important; }
+  .google-search-wrapper :global(.gsc-search-button-v2) { @apply ml-2 flex h-[34px] cursor-pointer items-center justify-center rounded bg-[#2c3e50] px-3.5 m-0 !important; }
+  .google-search-wrapper :global(.gsc-orderby-label),
+  .google-search-wrapper :global(.gsc-selected-option-container) { @apply hidden !important; }
 </style>

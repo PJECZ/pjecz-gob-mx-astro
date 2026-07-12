@@ -1,0 +1,83 @@
+---
+// src/components/AccessibilityMenu.astro (Botones para aumentar el tamaño de fuente o disminuirla, y para alternar entre modo oscuro y claro)
+---
+<div class="fixed top-1/2 right-0 left-auto transform -translate-y-1/2 flex flex-col shadow-[-2px_2px_10px_rgba(0,0,0,0.3)] z-[9999]">
+  
+  <button class="theme-toggle-btn w-[50px] h-[50px] bg-[#262626] border-none cursor-pointer flex items-center justify-center rounded-tl-md transition-all hover:brightness-110" title="Alternar modo oscuro">
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button id="text-plus" class="w-[50px] h-[50px] bg-[#3b5998] text-white font-bold text-lg border-none cursor-pointer flex items-center justify-center transition-all hover:brightness-110" title="Aumentar tamaño de texto">
+    A+
+  </button>
+  <button id="text-minus" class="w-[50px] h-[50px] bg-[#1da1f2] text-white font-bold text-lg border-none cursor-pointer flex items-center justify-center rounded-bl-md transition-all hover:brightness-110" title="Disminuir tamaño de texto">
+    A-
+  </button>
+</div>
+<script>
+  function initAccessibility() {
+    // === CONTROL DE TAMAÑO DE FUENTE POR ZOOM PROPORCIONAL ===
+    const savedSize = localStorage.getItem('accessibility-font-size');
+    let currentFontSize = savedSize ? parseInt(savedSize) : 100;
+    
+    // Obtenemos el contenedor principal para aplicarle el zoom sin alterar Header ni Footer
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      (mainContent as any).style.zoom = (currentFontSize / 100).toString();
+    }
+    const textPlusBtn = document.getElementById('text-plus');
+    const textMinusBtn = document.getElementById('text-minus');
+
+    if (textPlusBtn && textPlusBtn.parentNode) {
+      const newPlus = textPlusBtn.cloneNode(true);
+      textPlusBtn.parentNode.replaceChild(newPlus, textPlusBtn);
+      newPlus.addEventListener('click', () => {
+        if (currentFontSize < 130) {
+          currentFontSize += 10;
+          if (mainContent) (mainContent as any).style.zoom = (currentFontSize / 100).toString();
+          localStorage.setItem('accessibility-font-size', currentFontSize.toString());
+        }
+      });
+    }
+    if (textMinusBtn && textMinusBtn.parentNode) {
+      const newMinus = textMinusBtn.cloneNode(true);
+      textMinusBtn.parentNode.replaceChild(newMinus, textMinusBtn);
+      
+      newMinus.addEventListener('click', () => {
+        if (currentFontSize > 90) {
+          currentFontSize -= 10;
+          if (mainContent) (mainContent as any).style.zoom = (currentFontSize / 100).toString();
+          localStorage.setItem('accessibility-font-size', currentFontSize.toString());
+        }
+      });
+    }
+
+    // === CONTROL DE MODO OSCURO ===
+    const themeButtons = document.querySelectorAll('.theme-toggle-btn');
+    themeButtons.forEach(btn => {
+      if (btn.parentNode) {
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        
+        newBtn.addEventListener('click', () => {
+          if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+          } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          }
+        });
+      }
+    });
+  }
+  // Escuchar de forma segura las transiciones de Astro
+  document.addEventListener('astro:page-load', initAccessibility);
+</script>
+<style is:global>
+  /* Transición suave para los cambios de zoom del contenedor principal */
+  main {
+    transition: zoom 0.15s ease-in-out;
+  }
+</style>
