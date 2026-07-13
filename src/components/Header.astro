@@ -1,13 +1,26 @@
 ---
+<<<<<<< Updated upstream
 //Header.Astro-PJECZ
 interface SubNavItem { label: string; href?: string; children?: SubNavItem[]; }
 interface NavItem { id: string; title: string; href?: string; items?: SubNavItem[]; }
 interface SocialLink { icon: string; href: string; }
 //Navbar y rutas (Actualmente solo aparece "Hola Mundo, seccion en construcción")
+=======
+/**
+ * Header institucional — franja de gobierno, lockup del escudo y nav primaria con submenús.
+ */
+interface SubNavItem { label: string; href?: string; children?: SubNavItem[]; }
+interface NavItem { id: string; title: string; href?: string; items?: SubNavItem[]; }
+
+interface Props { current?: string; }
+const { current = 'home' } = Astro.props;
+
+>>>>>>> Stashed changes
 const NAV: NavItem[] = [
   { id: 'conocenos', title: 'Conócenos', items: [
     { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos' },
     { label: 'Estructura', href: '/conocenos/estructura' },
+<<<<<<< Updated upstream
     { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial' }
   ]},
   { id: 'consultas', title: 'Consultas', items: [
@@ -64,6 +77,120 @@ const socialLinks: SocialLink[] = [
         <a href={link.href} class="flex h-9 w-9 items-center justify-center rounded-full bg-[#8c939d] text-sm text-white transition-colors hover:bg-[#2c3e50]">
           <i class={link.icon}></i>
         </a>
+=======
+    { label: 'Observatorio Judicial', href: '/observatorio-judicial' }
+  ]},
+  { id: 'consultas', title: 'Consultas', items: [
+    { label: 'Acuerdos del Consejo', href: '/category/acuerdos-del-consejo' },
+    { label: 'Acuerdos del Pleno', href: '/category/acuerdos-del-pleno' },
+    { label: 'Agenda de Audiencias', href: '/consultas/agenda-audiencias' },
+    { label: 'Citas', href: '/citas' },
+    { label: 'Edictos en Línea', href: '/consultas/edictos' },
+    { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdo' },
+    { label: 'Poder en línea', href: '/poder-en-linea' },
+    { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-jurisprudencias' },
+    { label: 'Tramites y servicios', href: '/tramites-y-servicios' },
+    { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias' },
+    { label: 'Más...', href: '/consultas' }
+  ]},
+  { id: 'prensa', title: 'Sala de Prensa', items: [
+    { label: 'Boletines Judiciales', href: '/boletines-judiciales' },
+    { label: 'Calendario de Labores', href: '/calendario-de-labores' },
+    { label: 'Comunicados', href: '/category/comunicados' },
+    { label: 'Entrevistas', href: '/category/entrevistas' },
+    { label: 'Noticias', href: '/category/noticias' },
+    { label: 'News Letters', href: '/category/news-letter' },
+    { label: 'Sesiones', children: [
+      { label: 'Pleno del TSJ', href: '/category/pleno-del-tribunal-superior-de-justicia' },
+      { label: 'Sala Civil y Mercantil', href: '/category/sala-civil-y-mercantil' },
+      { label: 'Sala Familiar', href: '/category/sala-familiar' },
+      { label: 'Sala Penal', href: '/category/sala-penal' },
+      { label: 'Sala Regional', href: '/category/sala-regional' },
+      { label: 'Tribunal Constitucional', href: '/category/tribunal-constitucional' }
+    ]}
+  ]},
+  { id: 'transparencia', title: 'Transparencia', items: [
+    { label: 'Transparencia', href: '/transparencia' },
+    { label: 'Transparencia Proactiva', href: '/transparencia-proactiva' },
+    { label: 'Armonización Contable', href: '/armonizacion-contable' }
+  ]},
+  { id: 'estudiantes', title: 'Estudiantes', href: '/justicia-para-ti/justicia-para-ti' }
+];
+---
+<header class="site-header">
+  <!-- Franja de utilidad del gobierno del estado -->
+  <div class="gov-strip">
+    <div class="container-wide gov-strip__inner">
+      <span>GOBIERNO DEL ESTADO DE COAHUILA DE ZARAGOZA</span>
+      <span class="gov-strip__links">
+        <a href="https://x.com/PJCoah" target="_blank" rel="noopener">TWITTER</a>
+        <a href="https://www.facebook.com/pjcoah/" target="_blank" rel="noopener">FACEBOOK</a>
+        <a href="https://www.youtube.com/channel/UCJ7eJJ-uE-J3yoreEDqLvHg" target="_blank" rel="noopener">YOUTUBE</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Fila del escudo -->
+  <div class="container-wide crest-row">
+    <a href="/" class="crest-lockup">
+      <img src="/assets/logo-horizontal.png" alt="Poder Judicial del Estado de Coahuila de Zaragoza" />
+    </a>
+    
+    <!-- Contenedor del Buscador de Google con la clase estática de la plantilla -->
+    <div class="search-box-wrapper">
+      <div id="search-box-container" class="google-search-wrapper" data-astro-reload>
+        <div class="gcse-search" data-newWindow="false"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navegación primaria flotante e inmune a colapsos -->
+  <nav class="primary-nav" aria-label="Navegación principal">
+    <div class="container-wide primary-nav__inner">
+      {NAV.map((item) => (
+        <div class="primary-nav__item">
+          {item.items ? (
+            <>
+              <button 
+                class:list={['primary-nav__link', { 'is-active': current === item.id }]}
+                aria-expanded="false"
+              >
+                {item.title} <span class="nav-arrow" aria-hidden="true">▼</span>
+              </button>
+              
+              <!-- Primer nivel desplegable (Submenú) -->
+              <div class="dropdown-menu">
+                {item.items.map((sub) => (
+                  <div class="dropdown-menu__item">
+                    <a href={sub.href || '#'} class="dropdown-menu__link">
+                      {sub.label} {sub.children && <span class="nav-arrow-right" aria-hidden="true">▶</span>}
+                    </a>
+                    
+                    <!-- Segundo nivel desplegable (Children de Sesiones) -->
+                    {sub.children && (
+                      <div class="dropdown-submenu">
+                        {sub.children.map((child) => (
+                          <a href={child.href} class="dropdown-submenu__link">
+                            {child.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <a
+              href={item.href}
+              class:list={['primary-nav__link', { 'is-active': current === item.id }]}
+              aria-current={current === item.id ? 'page' : undefined}
+            >
+              {item.title}
+            </a>
+          )}
+        </div>
+>>>>>>> Stashed changes
       ))}
     </div>
   </div>
@@ -110,6 +237,10 @@ const socialLinks: SocialLink[] = [
     </div>
   </div>
 </header>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <!-- Buscador Programable de Google -->
 <script is:inline>
   function loadGoogleSearch() {
@@ -123,6 +254,7 @@ const socialLinks: SocialLink[] = [
   }
   document.addEventListener('astro:page-load', loadGoogleSearch);
 </script>
+<<<<<<< Updated upstream
 <style>
   .google-search-wrapper { @apply flex h-[38px] w-full max-w-[280px] items-center p-0 overflow-visible; }
   .google-search-wrapper :global(.gsc-control-cse) { @apply w-full border-none bg-transparent p-0 m-0; }
@@ -132,4 +264,150 @@ const socialLinks: SocialLink[] = [
   .google-search-wrapper :global(.gsc-search-button-v2) { @apply ml-2 flex h-[34px] cursor-pointer items-center justify-center rounded bg-[#2c3e50] px-3.5 m-0 !important; }
   .google-search-wrapper :global(.gsc-orderby-label),
   .google-search-wrapper :global(.gsc-selected-option-container) { @apply hidden !important; }
+=======
+
+<style>
+  .site-header { border-bottom: 1px solid var(--border); background: var(--bg); display: block; }
+
+  .gov-strip {
+    background: var(--pj-black-100);
+    color: var(--pj-black-25);
+    padding: 8px 0;
+    font: 400 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wide);
+  }
+  .gov-strip__inner { display: flex; justify-content: space-between; align-items: center; }
+  .gov-strip__links { display: flex; gap: var(--space-5); }
+  .gov-strip__links a:hover { color: var(--pj-white); }
+
+  .crest-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: 22px;
+    justify-content: space-between;
+  }
+  .crest-lockup img { height: 60px; width: auto; }
+
+  /* Contenedor del Buscador alineado al estilo de la plantilla */
+  .search-box-wrapper {
+    margin-left: auto;
+    min-width: 280px;
+    max-width: 320px;
+  }
+
+  .primary-nav { border-top: 1px solid var(--border-faint); background: var(--bg-muted); position: relative; }
+  .primary-nav__inner { display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; }
+  
+  .primary-nav__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .primary-nav__link {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 16px 20px;
+    font: 700 var(--fs-12)/1 var(--font-sans);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color .15s ease, border-color .15s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .primary-nav__link:hover { color: var(--fg); }
+  .primary-nav__link.is-active { color: var(--fg); border-bottom-color: var(--accent); }
+
+  .nav-arrow { font-size: 8px; color: var(--fg-faint); transition: transform 0.15s ease; }
+  .primary-nav__item:hover .nav-arrow { color: var(--fg); }
+  .nav-arrow-right { font-size: 8px; margin-left: auto; color: var(--fg-faint); }
+
+  /* Estructura BEM de los Menús Desplegables mediante CSS Puro */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    display: none;
+    min-width: 220px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: 0;
+    padding: 8px 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  .primary-nav__item:hover .dropdown-menu { display: block; }
+
+  .dropdown-menu__item { position: relative; }
+
+  .dropdown-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font: 500 var(--fs-12)/1.2 var(--font-sans);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .dropdown-menu__link:hover { background: var(--bg-muted); color: var(--fg); }
+
+  /* Submenú de segundo nivel (Sesiones) */
+  .dropdown-submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 101;
+    display: none;
+    min-width: 240px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 8px 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  }
+  .dropdown-menu__item:hover .dropdown-submenu { display: block; }
+
+  .dropdown-submenu__link {
+    display: block;
+    padding: 10px 20px;
+    font: 500 var(--fs-12)/1.2 var(--font-sans);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .dropdown-submenu__link:hover { background: var(--bg-muted); color: var(--fg); }
+
+  /* Estilos específicos e inyecciones limpias para el motor de Google */
+  .google-search-wrapper { display: flex; h: 36px; w: 100%; align-items: center; overflow: visible; }
+  .google-search-wrapper :global(.gsc-control-cse) { w: 100% !important; border: none !important; background: transparent !important; padding: 0 !important; m: 0 !important; }
+  .google-search-wrapper :global(.gsc-search-box) { margin: 0 !important; display: flex !important; w: 100% !important; align-items: center !important; }
+  .google-search-wrapper :global(.gsc-input-box) { margin: 0 !important; h: 36px !important; w: 100% !important; border: 1px solid var(--border-strong) !important; background: transparent !important; padding: 0 12px !important; box-shadow: none !important; display: flex !important; align-items: center !important; }
+  .google-search-wrapper :global(input.gsc-input) { margin: 0 !important; h: 100% !important; w: 100% !important; background: transparent !important; font: 400 var(--fs-14) var(--font-sans) !important; color: var(--fg) !important; }
+  .google-search-wrapper :global(.gsc-search-button-v2) { ml: 10px !important; display: flex !important; h: 36px !important; cursor: pointer !important; align-items: center !important; justify-content: center !important; background: var(--pj-black-100) !important; border: none !important; px: 14px !important; margin: 0 !important; }
+  .google-search-wrapper :global(.gsc-orderby-label),
+  .google-search-wrapper :global(.gsc-selected-option-container) { display: none !important; }
+  .google-search-wrapper :global(table), .google-search-wrapper :global(tbody), .google-search-wrapper :global(tr), .google-search-wrapper :global(td) { background: transparent !important; border: none !important; padding: 0 !important; margin: 0 !important; }
+
+  @media (max-width: 760px) {
+    .crest-row { flex-wrap: wrap; gap: var(--space-3); }
+    .search-box-wrapper { min-width: 100%; margin-left: 0; }
+    .primary-nav__inner { flex-direction: column; align-items: flex-start; }
+    .primary-nav__item { w: 100%; }
+    .primary-nav__link { padding: 12px 14px; w: 100%; justify-content: space-between; }
+    .dropdown-menu { position: static; display: none; w: 100%; border: 0; box-shadow: none; background: var(--bg-muted); padding-left: 10px; }
+    .primary-nav__item:hover .dropdown-menu { display: block; }
+    .dropdown-submenu { position: static; display: none; w: 100%; border: 0; box-shadow: none; background: var(--bg); padding-left: 10px; }
+    .dropdown-menu__item:hover .dropdown-submenu { display: block; }
+  }
+>>>>>>> Stashed changes
 </style>
