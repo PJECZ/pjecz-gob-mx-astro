@@ -81,7 +81,6 @@ const NAV = [
       </span>
     </div>
   </div>
-
   <div class="container-wide crest-row">
     <a href="/" class="crest-lockup">
       <img src="/assets/logo-horizontal.png" alt="Poder Judicial del Estado de Coahuila de Zaragoza" />
@@ -91,7 +90,6 @@ const NAV = [
       <input type="search" placeholder="Buscar expediente, acuerdo…" aria-label="Buscar" />
     </form>
   </div>
-
   <nav class="primary-nav" aria-label="Navegación principal">
     <div class="container-wide primary-nav__inner">
       <ul class="nav-list">
@@ -106,7 +104,6 @@ const NAV = [
                 {item.title} <span class="arrow">▼</span>
               </span>
             )}
-
             {/* Primer nivel de submenú (items) */}
             {item.items && (
               <ul class="dropdown-menu">
@@ -119,7 +116,6 @@ const NAV = [
                         {subItem.label} <span class="arrow-right">▶</span>
                       </span>
                     )}
-
                     {/* Segundo nivel de submenú (children de Sesiones) */}
                     {subItem.children && (
                       <ul class="subdropdown-menu">
@@ -218,10 +214,8 @@ const NAV = [
   }
   .primary-nav__link:hover, .trigger-dropdown:hover { color: var(--fg); }
   .nav-item.is-active > .primary-nav__link { color: var(--fg); border-bottom-color: var(--accent); }
-
   .arrow { font-size: 8px; margin-left: 5px; display: inline-block; vertical-align: middle; }
   .arrow-right { font-size: 8px; margin-left: auto; }
-
   /* --- DROPDOWN CSS --- */
   .dropdown-menu {
     position: absolute;
@@ -239,9 +233,7 @@ const NAV = [
     transform: translateY(10px);
     transition: opacity .2s, transform .2s, visibility .2s;
   }
-
   .dropdown-item { position: relative; }
-
   .dropdown-item a, .trigger-subdropdown {
     display: flex;
     align-items: center;
@@ -251,7 +243,6 @@ const NAV = [
     text-decoration: none;
     cursor: pointer;
   }
-
   .dropdown-item a:hover, .trigger-subdropdown:hover {
     background: var(--bg-muted);
     color: var(--accent);
@@ -279,7 +270,6 @@ const NAV = [
     transform: translateX(10px);
     transition: opacity .2s, transform .2s, visibility .2s;
   }
-
   .dropdown-item:hover .subdropdown-menu {
     opacity: 1;
     visibility: visible;
@@ -289,7 +279,6 @@ const NAV = [
     .crest-row { flex-wrap: wrap; }
     .search { min-width: 100%; margin-left: 0; }
     .primary-nav__link { padding: 12px 14px; }
-    
     .dropdown-menu, .subdropdown-menu {
       position: static;
       box-shadow: none;
@@ -301,7 +290,6 @@ const NAV = [
       background: rgba(0,0,0,0.02);
       padding-left: 15px;
     }
-    
     .nav-item:hover .dropdown-menu, 
     .dropdown-item:hover .subdropdown-menu {
       display: block;
