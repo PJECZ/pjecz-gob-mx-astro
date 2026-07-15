@@ -2,12 +2,75 @@
 /**
  * Header institucional — franja de gobierno, lockup del escudo y nav primaria.
  */
-import { NAV } from '@data/site';
 interface Props { current?: string; }
 const { current = 'home' } = Astro.props;
+const NAV = [
+  { 
+    id: 'conocenos', 
+    title: 'Conócenos', 
+    items: [
+      { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos' },
+      { label: 'Estructura', href: '/conocenos/estructura' },
+      { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial' }
+    ]
+  },
+  { 
+    id: 'consultas', 
+    title: 'Consultas', 
+    items: [
+      { label: 'Acuerdos del Consejo', href: '/category/boletines-judiciales' },
+      { label: 'Acuerdos del Pleno', href: '/category/acuerdos-del-pleno' },
+      { label: 'Comunicados', href: '/category/comunicados' },
+      { label: 'Citas', href: '/citas' },
+      { label: 'Edictos en Línea', href: '/consultas/edictos' },
+      { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdo' },
+      { label: 'Poder en línea', href: '/poder-en-linea' },
+      { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-jurisprudencias' },
+      { label: 'Tramites y servicios', href: '/tramites-y-servicios' },
+      { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias' },
+      { label: 'Más...', href: '/consultas/consultas' }
+    ]
+  },
+  { 
+    id: 'prensa', 
+    title: 'Sala de Prensa', 
+    items: [
+      { label: 'Boletines Judiciales', href: '/boletines-judiciales' },
+      { label: 'Calendario de Labores', href: '/calendario-de-labores' },
+      { label: 'Comunicados', href: '/category/comunicados' },
+      { label: 'Entrevistas', href: '/category/entrevistas' },
+      { label: 'Noticias', href: '/category/noticias' },
+      { label: 'News Letters', href: '/category/news-letter' },
+      { 
+        label: 'Sesiones', 
+        children: [
+          { label: 'Pleno del TSJ', href: '/category/pleno-del-tribunal-superior-de-justicia' },
+          { label: 'Sala Civil y Mercantil', href: '/category/sala-civil-y-mercantil' },
+          { label: 'Sala Familiar', href: '/category/sala-familiar' },
+          { label: 'Sala Penal', href: '/category/sala-penal' },
+          { label: 'Sala Regional', href: '/category/sala-regional' },
+          { label: 'Tribunal Constitucional', href: '/category/tribunal-constitucional' }
+        ]
+      }
+    ]
+  },
+  { 
+    id: 'transparencia', 
+    title: 'Transparencia', 
+    items: [
+      { label: 'Transparencia', href: '/transparencia' },
+      { label: 'Transparencia Proactiva', href: '/transparencia-proactiva' },
+      { label: 'Armonización Contable', href: '/armonizacion-contable' }
+    ]
+  },
+  { 
+    id: 'estudiantes', 
+    title: 'Estudiantes', 
+    href: '/justicia-para-ti' 
+  }
+];
 ---
 <header class="site-header">
-  <!-- Franja de utilidad del gobierno del estado -->
   <div class="gov-strip">
     <div class="container-wide gov-strip__inner">
       <span>GOBIERNO DEL ESTADO DE COAHUILA DE ZARAGOZA</span>
@@ -19,7 +82,6 @@ const { current = 'home' } = Astro.props;
     </div>
   </div>
 
-  <!-- Fila del escudo -->
   <div class="container-wide crest-row">
     <a href="/" class="crest-lockup">
       <img src="/assets/logo-horizontal.png" alt="Poder Judicial del Estado de Coahuila de Zaragoza" />
@@ -30,23 +92,56 @@ const { current = 'home' } = Astro.props;
     </form>
   </div>
 
-  <!-- Navegación primaria -->
   <nav class="primary-nav" aria-label="Navegación principal">
     <div class="container-wide primary-nav__inner">
-      {NAV.map((item) => (
-        <a
-          href={item.href}
-          class:list={['primary-nav__link', { 'is-active': current === item.id }]}
-          aria-current={current === item.id ? 'page' : undefined}
-        >{item.label}</a>
-      ))}
+      <ul class="nav-list">
+        {NAV.map((item) => (
+          <li class:list={['nav-item', { 'is-active': current === item.id }]}>
+            {item.href ? (
+              <a href={item.href} class="primary-nav__link" aria-current={current === item.id ? 'page' : undefined}>
+                {item.title}
+              </a>
+            ) : (
+              <span class="primary-nav__link trigger-dropdown" tabindex="0">
+                {item.title} <span class="arrow">▼</span>
+              </span>
+            )}
+
+            {/* Primer nivel de submenú (items) */}
+            {item.items && (
+              <ul class="dropdown-menu">
+                {item.items.map((subItem) => (
+                  <li class="dropdown-item">
+                    {subItem.href ? (
+                      <a href={subItem.href}>{subItem.label}</a>
+                    ) : (
+                      <span class="trigger-subdropdown">
+                        {subItem.label} <span class="arrow-right">▶</span>
+                      </span>
+                    )}
+
+                    {/* Segundo nivel de submenú (children de Sesiones) */}
+                    {subItem.children && (
+                      <ul class="subdropdown-menu">
+                        {subItem.children.map((child) => (
+                          <li class="dropdown-item">
+                            <a href={child.href}>{child.label}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   </nav>
 </header>
-
 <style>
-  .site-header { border-bottom: 1px solid var(--border); background: var(--bg); }
-
+  .site-header { border-bottom: 1px solid var(--border); background: var(--bg); position: relative; z-index: 100; }
   .gov-strip {
     background: var(--pj-black-100);
     color: var(--pj-black-25);
@@ -57,7 +152,6 @@ const { current = 'home' } = Astro.props;
   .gov-strip__inner { display: flex; justify-content: space-between; align-items: center; }
   .gov-strip__links { display: flex; gap: var(--space-5); }
   .gov-strip__links a:hover { color: var(--pj-white); }
-
   .crest-row {
     display: flex;
     align-items: center;
@@ -65,7 +159,6 @@ const { current = 'home' } = Astro.props;
     padding-block: 22px;
   }
   .crest-lockup img { height: 60px; width: auto; }
-
   .search {
     margin-left: auto;
     display: flex;
@@ -97,10 +190,21 @@ const { current = 'home' } = Astro.props;
     width: 100%;
   }
   .search input::placeholder { color: var(--fg-faint); }
-
   .primary-nav { border-top: 1px solid var(--border-faint); background: var(--bg-muted); }
-  .primary-nav__inner { display: flex; flex-wrap: wrap; }
+  .primary-nav__inner { display: flex; }
+  .nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .nav-item {
+    position: relative;
+  }
   .primary-nav__link {
+    display: block;
     padding: 16px 20px;
     font: 700 var(--fs-12)/1 var(--font-sans);
     letter-spacing: var(--tracking-wider);
@@ -109,13 +213,98 @@ const { current = 'home' } = Astro.props;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: color .15s ease, border-color .15s ease;
+    cursor: pointer;
+    user-select: none;
   }
-  .primary-nav__link:hover { color: var(--fg); }
-  .primary-nav__link.is-active { color: var(--fg); border-bottom-color: var(--accent); }
+  .primary-nav__link:hover, .trigger-dropdown:hover { color: var(--fg); }
+  .nav-item.is-active > .primary-nav__link { color: var(--fg); border-bottom-color: var(--accent); }
 
+  .arrow { font-size: 8px; margin-left: 5px; display: inline-block; vertical-align: middle; }
+  .arrow-right { font-size: 8px; margin-left: auto; }
+
+  /* --- DROPDOWN CSS --- */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    min-width: 250px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity .2s, transform .2s, visibility .2s;
+  }
+
+  .dropdown-item { position: relative; }
+
+  .dropdown-item a, .trigger-subdropdown {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font: 400 var(--fs-14) var(--font-sans);
+    color: var(--fg);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .dropdown-item a:hover, .trigger-subdropdown:hover {
+    background: var(--bg-muted);
+    color: var(--accent);
+  }
+  .nav-item:hover .dropdown-menu,
+  .nav-item:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  /* --- SUB-DROPDOWN CSS (Sesiones) --- */
+  .subdropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    min-width: 280px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: opacity .2s, transform .2s, visibility .2s;
+  }
+
+  .dropdown-item:hover .subdropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
   @media (max-width: 760px) {
     .crest-row { flex-wrap: wrap; }
     .search { min-width: 100%; margin-left: 0; }
     .primary-nav__link { padding: 12px 14px; }
+    
+    .dropdown-menu, .subdropdown-menu {
+      position: static;
+      box-shadow: none;
+      border: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none;
+      background: rgba(0,0,0,0.02);
+      padding-left: 15px;
+    }
+    
+    .nav-item:hover .dropdown-menu, 
+    .dropdown-item:hover .subdropdown-menu {
+      display: block;
+    }
   }
 </style>
