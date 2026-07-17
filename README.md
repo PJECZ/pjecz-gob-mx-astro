@@ -1,43 +1,63 @@
-# Astro Starter Kit: Minimal
+# 🏛️ Nuevo Sitio Web — Poder Judicial del Estado de Coahuila de Zaragoza
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Este repositorio contiene el código fuente del portal institucional desarrollado con **Astro**. Este documento resume la estructura del proyecto y las principales reglas de desarrollo.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+# 📁 Estructura del Proyecto
 
 ```text
-/
-├── public/
+pjecz-gob-mx-astro/
+├── public/              # Archivos estáticos
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/          # Imágenes y recursos
+│   ├── components/      # Componentes (PascalCase)
+│   ├── layouts/         # Plantillas base (Se recomienda no hacer cambios en este archivo y de ser necesario, se deberan comentar los cambios realizados)
+│   ├── pages/           # Rutas del sitio
+│   └── styles/          # Estilos globales
+└── astro.config.mjs     # Configuración de Astro
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+# 🛠️ Comandos
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Comando | Descripción |
+|---------|-------------|
+| `npm install` | Instala las dependencias. |
+| `npm run dev` | Inicia el servidor local. |
+| `npm run build` | Genera la versión de producción. |
+| `npx astro check` | Valida el proyecto antes de subir cambios. |
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+# 📐 Convenciones de Código
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- Evitar espacios innecesarios.
+- Usar nombres de variables descriptivos.
+- Mantener el código limpio y reutilizable.
 
-## 👀 Want to learn more?
+**Correcto**
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```javascript
+const datos = {id: 1, tipo: "civil"};
+obtener_fecha_servidor();
+```
+
+**Incorrecto**
+
+```javascript
+const datos = { id : 1, tipo : "civil" };
+obtener_fecha_servidor ();
+```
+
+---
+
+# 📝 Nomenclatura
+
+| Elemento | Convención | Ejemplo |
+|----------|------------|----------|
+| Componentes | **PascalCase** | `Header.astro` |
+| Variables | **snake_case** | `nombre_usuario` |
+| Imágenes | **kebab-case** | `logo-blanco.png` |
+| Markdown | **kebab-case** | `boletin-judicial.md` |
