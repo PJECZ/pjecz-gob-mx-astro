@@ -3,6 +3,12 @@
  * Header institucional — franja de gobierno, lockup del escudo y nav primaria.
  */
 import { NAV } from '@data/site';
+// Importación de los iconos de redes sociales desde la carpeta de assets/icons.
+import { Image } from 'astro:assets';
+import twitterIcon from '../assets/icons/twitter.svg';
+import facebookIcon from '../assets/icons/facebook.svg';
+import vimeoIcon from '../assets/icons/vimeo.svg';
+import youtubeIcon from '../assets/icons/youtube.svg';
 interface Props { current?: string; }
 const { current = 'home' } = Astro.props;
 ---
@@ -18,18 +24,33 @@ const { current = 'home' } = Astro.props;
       </span>
     </div>
   </div>
-
-  <!-- Fila del escudo -->
+  <!-- Fila del escudo, buscador y redes sociales -->
   <div class="container-wide crest-row">
     <a href="/" class="crest-lockup">
       <img src="/assets/logo-horizontal.png" alt="Poder Judicial del Estado de Coahuila de Zaragoza" />
     </a>
+    <!-- 1. Buscador -->
     <form class="search" role="search" action="#">
       <span class="search__icon" aria-hidden="true"></span>
       <input type="search" placeholder="Buscar expediente, acuerdo…" aria-label="Buscar" />
     </form>
-  </div>
 
+    <!-- 2.Links a  Redes sociales  -->
+    <div class="social-icons">
+      <a href="https://x.com/PJCoah" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-btn">
+        <Image src={twitterIcon} alt="Twitter" class="social-icon" />
+      </a>
+      <a href="https://www.facebook.com/pjcoah" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-btn">
+        <Image src={facebookIcon} alt="Facebook" class="social-icon" />
+      </a>
+      <a href="https://vimeo.com/pjcoah" target="_blank" rel="noopener noreferrer" aria-label="Vimeo" class="social-btn">
+        <Image src={vimeoIcon} alt="Vimeo" class="social-icon" />
+      </a>
+      <a href="https://www.youtube.com/@poderjudicialdelestadodeco3291" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-btn">
+        <Image src={youtubeIcon} alt="YouTube" class="social-icon" />
+      </a>
+    </div>
+  </div>
   <!-- Navegación primaria -->
   <nav class="primary-nav" aria-label="Navegación principal">
     <div class="container-wide primary-nav__inner">
@@ -43,7 +64,6 @@ const { current = 'home' } = Astro.props;
     </div>
   </nav>
 </header>
-
 <style>
   .site-header { border-bottom: 1px solid var(--border); background: var(--bg); }
 
@@ -65,7 +85,6 @@ const { current = 'home' } = Astro.props;
     padding-block: 22px;
   }
   .crest-lockup img { height: 60px; width: auto; }
-
   .search {
     margin-left: auto;
     display: flex;
@@ -97,6 +116,38 @@ const { current = 'home' } = Astro.props;
     width: 100%;
   }
   .search input::placeholder { color: var(--fg-faint); }
+  /*  Estilos para iconos de Redes sociales */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 14px;         
+  margin-left: 24px;  
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;       
+  height: 38px;      
+  border-radius: 50%;
+  background-color: #9da39a;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.social-btn:hover {
+  background-color: #000000;
+  transform: translateY(-1px); /* Efecto opcional de elevación */
+}
+
+.social-icon {
+  width: 18px;       
+  height: 18px;      
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
 
   .primary-nav { border-top: 1px solid var(--border-faint); background: var(--bg-muted); }
   .primary-nav__inner { display: flex; flex-wrap: wrap; }
@@ -116,6 +167,7 @@ const { current = 'home' } = Astro.props;
   @media (max-width: 760px) {
     .crest-row { flex-wrap: wrap; }
     .search { min-width: 100%; margin-left: 0; }
+    .social-icons { margin-left: 0; width: 100%; justify-content: flex-end; }
     .primary-nav__link { padding: 12px 14px; }
   }
 </style>
