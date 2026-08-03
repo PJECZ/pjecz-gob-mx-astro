@@ -27,17 +27,17 @@ const NAV = [
     id: 'consultas', 
     title: 'Consultas', 
     items: [
-      { label: 'Acuerdos del Consejo', href: '/category/boletines-judiciales' },
+      { label: 'Acuerdos del Consejo', href: '/category/acuerdos-del-consejo' },
       { label: 'Acuerdos del Pleno', href: '/category/acuerdos-del-pleno' },
-      { label: 'Comunicados', href: '/category/comunicados' },
+      { label: 'Agenda de Audiencias', href: '/consultas/agenda-audiencias' },
       { label: 'Citas', href: '/citas' },
       { label: 'Edictos en Línea', href: '/consultas/edictos' },
-      { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdo' },
+      { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdos' },
       { label: 'Poder en línea', href: '/poder-en-linea' },
       { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-jurisprudencias' },
       { label: 'Tramites y servicios', href: '/tramites-y-servicios' },
       { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias' },
-      { label: 'Más...', href: '/consultas/consultas' }
+      { label: 'Más...', href: '/consultas' }
     ]
   },
   { 
@@ -49,7 +49,7 @@ const NAV = [
       { label: 'Comunicados', href: '/category/comunicados' },
       { label: 'Entrevistas', href: '/category/entrevistas' },
       { label: 'Noticias', href: '/category/noticias' },
-      { label: 'News Letters', href: '/category/news-letter' },
+      { label: 'News Letters', href: '/category/news-letters' },
       { 
         label: 'Sesiones', 
         children: [
@@ -98,7 +98,6 @@ const NAV = [
       <span class="search__icon" aria-hidden="true"></span>
       <input type="search" placeholder="Buscar expediente, acuerdo…" aria-label="Buscar" />
     </form>
-
     <div class="social-icons">
       <a href="https://x.com/PJCoah" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-btn">
         <Image src={twitterIcon} alt="Twitter" class="social-icon" />
@@ -207,7 +206,6 @@ const NAV = [
     width: 100%;
   }
   .search input::placeholder { color: var(--fg-faint); }
-
   /* Estilos para iconos de Redes sociales */
   .social-icons {
     display: flex;
@@ -215,7 +213,6 @@ const NAV = [
     gap: 14px;         
     margin-left: 24px;  
   }
-
   .social-btn {
     display: inline-flex;
     align-items: center;
@@ -228,22 +225,18 @@ const NAV = [
     text-decoration: none;
     flex-shrink: 0;
   }
-
   .social-btn:hover {
     background-color: #000000;
     transform: translateY(-1px);
   }
-
   .social-icon {
     width: 18px;       
     height: 18px;      
     object-fit: contain;
     filter: brightness(0) invert(1);
   }
-
   .primary-nav { border-top: 1px solid var(--border-faint); background: var(--bg-muted); }
   .primary-nav__inner { display: flex; flex-wrap: wrap; }
-  
   .primary-nav__link {
     display: flex;
     align-items: center;
@@ -261,24 +254,20 @@ const NAV = [
     cursor: pointer;
     text-decoration: none;
   }
-  
   .primary-nav__link:hover { color: var(--fg); }
   .primary-nav__link.is-active,
   .primary-nav__dropdown.is-active .primary-nav__link { 
     color: var(--fg); 
     border-bottom-color: var(--accent); 
   }
-
   .arrow-down, .arrow-right {
     font-size: 10px;
     display: inline-block;
   }
-
   /* Estilos para Menú Desplegable */
   .primary-nav__dropdown {
     position: relative;
   }
-
   /* Menú Nivel 1 */
   .dropdown-menu {
     display: none;
@@ -294,15 +283,12 @@ const NAV = [
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 100;
   }
-
   .primary-nav__dropdown:hover > .dropdown-menu {
     display: block;
   }
-
   .dropdown-item {
     position: relative;
   }
-
   .dropdown-link {
     display: flex;
     justify-content: space-between;
@@ -319,7 +305,6 @@ const NAV = [
     background: var(--bg-muted, #f7fafc);
     color: var(--accent, #1a202c);
   }
-
   /* Submenú Nivel 2 (Sesiones) */
   .submenu {
     display: none;
@@ -335,11 +320,9 @@ const NAV = [
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 101;
   }
-
   .dropdown-item--has-children:hover > .submenu {
     display: block;
   }
-
   @media (max-width: 760px) {
     .crest-row { flex-wrap: wrap; }
     .search { min-width: 100%; margin-left: 0; }
