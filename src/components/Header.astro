@@ -2,18 +2,84 @@
 /**
  * Header institucional — franja de gobierno, lockup del escudo y nav primaria.
  */
-import { NAV } from '@data/site';
 // Importación de los iconos de redes sociales desde la carpeta de assets/icons.
 import { Image } from 'astro:assets';
 import twitterIcon from '../assets/icons/twitter.svg';
 import facebookIcon from '../assets/icons/facebook.svg';
 import vimeoIcon from '../assets/icons/vimeo.svg';
 import youtubeIcon from '../assets/icons/youtube.svg';
+
 interface Props { current?: string; }
 const { current = 'home' } = Astro.props;
+
+// Lista completa de rutas
+const NAV = [
+  { 
+    id: 'conocenos', 
+    title: 'Conócenos', 
+    items: [
+      { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos' },
+      { label: 'Estructura', href: '/conocenos/estructura' },
+      { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial' }
+    ]
+  },
+  { 
+    id: 'consultas', 
+    title: 'Consultas', 
+    items: [
+      { label: 'Acuerdos del Consejo', href: '/category/boletines-judiciales' },
+      { label: 'Acuerdos del Pleno', href: '/category/acuerdos-del-pleno' },
+      { label: 'Comunicados', href: '/category/comunicados' },
+      { label: 'Citas', href: '/citas' },
+      { label: 'Edictos en Línea', href: '/consultas/edictos' },
+      { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdo' },
+      { label: 'Poder en línea', href: '/poder-en-linea' },
+      { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-jurisprudencias' },
+      { label: 'Tramites y servicios', href: '/tramites-y-servicios' },
+      { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias' },
+      { label: 'Más...', href: '/consultas/consultas' }
+    ]
+  },
+  { 
+    id: 'prensa', 
+    title: 'Sala de Prensa', 
+    items: [
+      { label: 'Boletines Judiciales', href: '/boletines-judiciales' },
+      { label: 'Calendario de Labores', href: '/calendario-de-labores' },
+      { label: 'Comunicados', href: '/category/comunicados' },
+      { label: 'Entrevistas', href: '/category/entrevistas' },
+      { label: 'Noticias', href: '/category/noticias' },
+      { label: 'News Letters', href: '/category/news-letter' },
+      { 
+        label: 'Sesiones', 
+        children: [
+          { label: 'Pleno del TSJ', href: '/category/pleno-del-tribunal-superior-de-justicia' },
+          { label: 'Sala Civil y Mercantil', href: '/category/sala-civil-y-mercantil' },
+          { label: 'Sala Familiar', href: '/category/sala-familiar' },
+          { label: 'Sala Penal', href: '/category/sala-penal' },
+          { label: 'Sala Regional', href: '/category/sala-regional' },
+          { label: 'Tribunal Constitucional', href: '/category/tribunal-constitucional' }
+        ]
+      }
+    ]
+  },
+  { 
+    id: 'transparencia', 
+    title: 'Transparencia', 
+    items: [
+      { label: 'Transparencia', href: '/transparencia' },
+      { label: 'Transparencia Proactiva', href: '/transparencia-proactiva' },
+      { label: 'Armonización Contable', href: '/armonizacion-contable' }
+    ]
+  },
+  { 
+    id: 'estudiantes', 
+    title: 'Estudiantes', 
+    href: '/justicia-para-ti' 
+  }
+];
 ---
 <header class="site-header">
-  <!-- Franja de utilidad del gobierno del estado -->
   <div class="gov-strip">
     <div class="container-wide gov-strip__inner">
       <span>GOBIERNO DEL ESTADO DE COAHUILA DE ZARAGOZA</span>
@@ -24,18 +90,15 @@ const { current = 'home' } = Astro.props;
       </span>
     </div>
   </div>
-  <!-- Fila del escudo, buscador y redes sociales -->
   <div class="container-wide crest-row">
     <a href="/" class="crest-lockup">
       <img src="/assets/logo-horizontal.png" alt="Poder Judicial del Estado de Coahuila de Zaragoza" />
     </a>
-    <!-- 1. Buscador -->
     <form class="search" role="search" action="#">
       <span class="search__icon" aria-hidden="true"></span>
       <input type="search" placeholder="Buscar expediente, acuerdo…" aria-label="Buscar" />
     </form>
 
-    <!-- 2.Links a  Redes sociales  -->
     <div class="social-icons">
       <a href="https://x.com/PJCoah" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-btn">
         <Image src={twitterIcon} alt="Twitter" class="social-icon" />
@@ -51,19 +114,47 @@ const { current = 'home' } = Astro.props;
       </a>
     </div>
   </div>
-  <!-- Navegación primaria -->
   <nav class="primary-nav" aria-label="Navegación principal">
     <div class="container-wide primary-nav__inner">
       {NAV.map((item) => (
-        <a
-          href={item.href}
-          class:list={['primary-nav__link', { 'is-active': current === item.id }]}
-          aria-current={current === item.id ? 'page' : undefined}
-        >{item.label}</a>
+        item.href ? (
+          <a
+            href={item.href}
+            class:list={['primary-nav__link', { 'is-active': current === item.id }]}
+            aria-current={current === item.id ? 'page' : undefined}
+          >{item.title}</a>
+        ) : (
+          <div class:list={['primary-nav__dropdown', { 'is-active': current === item.id }]}>
+            <button class="primary-nav__link dropdown-btn">
+              {item.title} <span class="arrow-down">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              {item.items?.map((subItem) => (
+                subItem.children ? (
+                  <li class="dropdown-item dropdown-item--has-children">
+                    <span class="dropdown-link">{subItem.label} <span class="arrow-right">▾</span></span>
+                    <ul class="submenu">
+                      {subItem.children.map((child) => (
+                        <li>
+                          <a href={child.href} class="dropdown-link">{child.label}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li class="dropdown-item">
+                    <a href={subItem.href} class="dropdown-link">{subItem.label}</a>
+                  </li>
+                )
+              ))}
+            </ul>
+          </div>
+        )
       ))}
     </div>
   </nav>
 </header>
+
 <style>
   .site-header { border-bottom: 1px solid var(--border); background: var(--bg); }
 
@@ -116,58 +207,150 @@ const { current = 'home' } = Astro.props;
     width: 100%;
   }
   .search input::placeholder { color: var(--fg-faint); }
-  /*  Estilos para iconos de Redes sociales */
-.social-icons {
-  display: flex;
-  align-items: center;
-  gap: 14px;         
-  margin-left: 24px;  
-}
 
-.social-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;       
-  height: 38px;      
-  border-radius: 50%;
-  background-color: #9da39a;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  text-decoration: none;
-  flex-shrink: 0;
-}
+  /* Estilos para iconos de Redes sociales */
+  .social-icons {
+    display: flex;
+    align-items: center;
+    gap: 14px;         
+    margin-left: 24px;  
+  }
 
-.social-btn:hover {
-  background-color: #000000;
-  transform: translateY(-1px); /* Efecto opcional de elevación */
-}
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;       
+    height: 38px;      
+    border-radius: 50%;
+    background-color: #9da39a;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
 
-.social-icon {
-  width: 18px;       
-  height: 18px;      
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-}
+  .social-btn:hover {
+    background-color: #000000;
+    transform: translateY(-1px);
+  }
+
+  .social-icon {
+    width: 18px;       
+    height: 18px;      
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
 
   .primary-nav { border-top: 1px solid var(--border-faint); background: var(--bg-muted); }
   .primary-nav__inner { display: flex; flex-wrap: wrap; }
+  
   .primary-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     padding: 16px 20px;
     font: 700 var(--fs-12)/1 var(--font-sans);
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--fg-muted);
+    border: none;
+    background: transparent;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: color .15s ease, border-color .15s ease;
+    cursor: pointer;
+    text-decoration: none;
   }
+  
   .primary-nav__link:hover { color: var(--fg); }
-  .primary-nav__link.is-active { color: var(--fg); border-bottom-color: var(--accent); }
+  .primary-nav__link.is-active,
+  .primary-nav__dropdown.is-active .primary-nav__link { 
+    color: var(--fg); 
+    border-bottom-color: var(--accent); 
+  }
+
+  .arrow-down, .arrow-right {
+    font-size: 10px;
+    display: inline-block;
+  }
+
+  /* Estilos para Menú Desplegable */
+  .primary-nav__dropdown {
+    position: relative;
+  }
+
+  /* Menú Nivel 1 */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 210px;
+    background: var(--bg, #ffffff);
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    border: 1px solid var(--border, #e2e8f0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .primary-nav__dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-item {
+    position: relative;
+  }
+
+  .dropdown-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    font: 400 var(--fs-12, 13px)/1.4 var(--font-sans, sans-serif);
+    color: var(--fg, #4a5568);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .dropdown-link:hover {
+    background: var(--bg-muted, #f7fafc);
+    color: var(--accent, #1a202c);
+  }
+
+  /* Submenú Nivel 2 (Sesiones) */
+  .submenu {
+    display: none;
+    position: absolute;
+    top: -6px;
+    left: 100%;
+    width: 220px;
+    background: var(--bg, #ffffff);
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    border: 1px solid var(--border, #e2e8f0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 101;
+  }
+
+  .dropdown-item--has-children:hover > .submenu {
+    display: block;
+  }
 
   @media (max-width: 760px) {
     .crest-row { flex-wrap: wrap; }
     .search { min-width: 100%; margin-left: 0; }
     .social-icons { margin-left: 0; width: 100%; justify-content: flex-end; }
     .primary-nav__link { padding: 12px 14px; }
+    .submenu {
+      position: static;
+      box-shadow: none;
+      border: none;
+      width: 100%;
+      padding-left: 12px;
+    }
   }
 </style>
