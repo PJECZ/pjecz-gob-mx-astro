@@ -2,7 +2,24 @@
 /**
  * Footer institucional — logo, columnas de enlaces y línea legal.
  */
-import { FOOTER_COLS } from '@data/site';
+const FOOTER_COLS = [
+  {
+    title: 'Institución',
+    items: ['Historia', 'Magistrados', 'Organigrama', 'Normativa', 'Transparencia']
+  },
+  {
+    title: 'Servicios',
+    items: ['Consulta de expedientes', 'Agenda de audiencias', 'Trámites en línea', 'Peritos', 'Mediadores', ]
+  },
+  {
+    title: 'Publicaciones',
+    items: ['Boletín judicial', 'Gaceta', 'Acuerdos plenarios', 'Jurisprudencia', 'Informe anual',]
+  },
+  {
+    title: 'Contacto',
+    items: ['Directorio', 'Contraloría', 'Quejas y sugerencias', 'Aviso de privacidad',]
+  }
+];
 ---
 <footer class="site-footer">
   <div class="container-wide">
