@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Bash script
 .bashrc
+
+# Descartar los directorios que están dentro de la carpeta "src/pages" y que no son necesarios para el control de versiones
+src/pages/**
