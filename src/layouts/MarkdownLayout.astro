@@ -3,7 +3,28 @@ import DefaultLayout from "./BaseLayout.astro";
 ---
 
 <DefaultLayout>
-    <article class="prose dark:prose-invert py-12 px-4 md:px-8 lg:px-12">
-        <slot />
-    </article>
+    <div class="md-container">
+        <article class="prose dark:prose-invert prose-custom">
+            <slot />
+        </article>
+    </div>
 </DefaultLayout>
+
+<style>
+        /* Estilos necesarios para centrar el contenido  */
+    /* Contendedor principal para centrar  */
+    .md-container {
+        width: 100%;
+        max-width: 1000px; /* Grosor del margen*/
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 2rem;  /* Margen izquierdo  */
+        padding-right: 2rem; /* Margen derecho */
+        padding-top: 2.5rem;
+        padding-bottom: 4rem;
+        box-sizing: border-box;
+    }
+    .prose-custom {
+        max-width: 100% !important;
+    }
+</style>
