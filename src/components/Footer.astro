@@ -5,19 +5,41 @@
 const FOOTER_COLS = [
   {
     title: 'Institución',
-    items: ['Historia', 'Magistrados', 'Organigrama', 'Normativa', 'Transparencia']
+    items: [
+      { label: '¿Quiénes somos?', href: '/conocenos/quienes-somos/' },
+      { label: 'Estructura', href: '/conocenos/estructura/' },
+      { label: 'Observatorio Judicial', href: '/conocenos/observatorio-judicial/' },
+      { label: 'Transparencia', href: '/transparencia/' },
+      { label: 'Transparencia Proactiva', href: '/transparencia-proactiva/' }
+    ]
   },
   {
-    title: 'Servicios',
-    items: ['Consulta de expedientes', 'Agenda de audiencias', 'Trámites en línea', 'Peritos', 'Mediadores', ]
+    title: 'Servicios y trámites',
+    items: [
+      { label: 'Poder en Línea', href: '/poder-en-linea/' },
+      { label: 'Citas', href: '/citas/' },
+      { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdo/' },
+      { label: 'Trámites y servicios', href: '/tramites-y-servicios/' },
+      { label: 'Edictos en Línea', href: '/consultas/edictos/' }
+    ]
   },
   {
     title: 'Publicaciones',
-    items: ['Boletín judicial', 'Gaceta', 'Acuerdos plenarios', 'Jurisprudencia', 'Informe anual',]
+    items: [
+      { label: 'Boletines Judiciales', href: '/boletines-judiciales/' },
+      { label: 'Acuerdos del Pleno', href: '/acuerdos-del-pleno/' },
+      { label: 'Acuerdos del Consejo', href: '/acuerdos-del-consejo/' },
+      { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-jurisprudencias/' },
+      { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias/' }
+    ]
   },
   {
-    title: 'Contacto',
-    items: ['Directorio', 'Contraloría', 'Quejas y sugerencias', 'Aviso de privacidad',]
+    title: 'Sala de Prensa',
+    items: [
+      { label: 'Comunicados', href: '/comunicados/' },
+      { label: 'Noticias', href: '/noticias/' },
+      { label: 'Calendario de Labores', href: '/calendario-de-labores/' }
+    ]
   }
 ];
 ---
@@ -32,7 +54,9 @@ const FOOTER_COLS = [
         <div class="footer-col">
           <div class="footer-col__title">{col.title}</div>
           <ul>
-            {col.items.map((item) => <li><a href="#">{item}</a></li>)}
+            {col.items.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
           </ul>
         </div>
       ))}
@@ -43,6 +67,7 @@ const FOOTER_COLS = [
     </div>
   </div>
 </footer>
+
 <style>
   .site-footer {
     background: var(--pj-black-100);

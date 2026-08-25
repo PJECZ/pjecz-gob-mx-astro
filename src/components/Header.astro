@@ -1,6 +1,6 @@
 ---
 /**
- * Header institucional — franja de gobierno, lockup del escudo y nav primaria.
+ * Header institucional — lockup del escudo y nav primaria.
  */
 // Importación de los iconos de redes sociales desde la carpeta de assets/icons.
 import { Image } from 'astro:assets';
@@ -29,10 +29,10 @@ const NAV = [
       { label: 'Acuerdos del Consejo', href: '/acuerdos-del-consejo/' },
       { label: 'Acuerdos del Pleno', href: '/acuerdos-del-pleno/' },
       { label: 'Agenda de Audiencias', href: '/consultas/agenda-audiencias/' },
-      { label: 'Citas', href: '/citas/' },
+      { label: 'Citas', href: 'https://citas.saji.gob.mx/' },
       { label: 'Edictos en Línea', href: '/consultas/edictos/' },
       { label: 'Listas de Acuerdo', href: '/consultas/listas-de-acuerdos/' },
-      { label: 'Poder en línea', href: '/poder-en-linea/' },
+      { label: 'Poder en línea', href: 'https://poderenlinea.gob.mx/auth/login' },
       { label: 'Tesis y Jurisprudencias', href: '/consultas/tesis-jurisprudencias/' },
       { label: 'Tramites y servicios', href: '/tramites-y-servicios/' },
       { label: 'Versión Pública de Sentencias', href: '/consultas/sentencias/' },
@@ -79,16 +79,6 @@ const NAV = [
 ];
 ---
 <header class="site-header">
-  <div class="gov-strip">
-    <div class="container-wide gov-strip__inner">
-      <span>GOBIERNO DEL ESTADO DE COAHUILA DE ZARAGOZA</span>
-      <span class="gov-strip__links">
-        <a href="#">CONTACTO</a>
-        <a href="#">MAPA DEL SITIO</a>
-        <a href="#" aria-label="Ajustar tamaño de texto">A+ A−</a>
-      </span>
-    </div>
-  </div>
   <div class="container-wide crest-row">
     <a href="/" class="crest-lockup">
       <img src="/assets/logo-horizontal.png" alt="Poder Judicial del Estado de Coahuila de Zaragoza" />
@@ -154,17 +144,6 @@ const NAV = [
 </header>
 <style>
   .site-header { border-bottom: 1px solid var(--border); background: var(--bg); }
-
-  .gov-strip {
-    background: var(--pj-black-100);
-    color: var(--pj-black-25);
-    padding: 8px 0;
-    font: 400 var(--fs-12)/1 var(--font-sans);
-    letter-spacing: var(--tracking-wide);
-  }
-  .gov-strip__inner { display: flex; justify-content: space-between; align-items: center; }
-  .gov-strip__links { display: flex; gap: var(--space-5); }
-  .gov-strip__links a:hover { color: var(--pj-white); }
 
   .crest-row {
     display: flex;
